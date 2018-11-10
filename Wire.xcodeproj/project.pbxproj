@@ -12,9 +12,11 @@
 		4CC71EED21976F76003BBB4A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */; };
 		4CC71EF021976F76003BBB4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC71EEE21976F76003BBB4A /* Main.storyboard */; };
 		4CC71EF221976F77003BBB4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC71EF121976F77003BBB4A /* Assets.xcassets */; };
-		4CC71EF521976F77003BBB4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC71EF321976F77003BBB4A /* LaunchScreen.storyboard */; };
 		4CC71F0021976F78003BBB4A /* WireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EFF21976F78003BBB4A /* WireTests.swift */; };
 		4CC71F0B21976F78003BBB4A /* WireUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71F0A21976F78003BBB4A /* WireUITests.swift */; };
+		4CC71F1921977C66003BBB4A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71F1821977C66003BBB4A /* TabBarController.swift */; };
+		4CC71F1B219781A2003BBB4A /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71F1A219781A2003BBB4A /* SettingsTableViewCell.swift */; };
+		4CC71F1D219788FB003BBB4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CC71F1C219788FB003BBB4A /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +43,6 @@
 		4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4CC71EEF21976F76003BBB4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4CC71EF121976F77003BBB4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4CC71EF421976F77003BBB4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4CC71EF621976F77003BBB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CC71EFB21976F78003BBB4A /* WireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC71EFF21976F78003BBB4A /* WireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireTests.swift; sourceTree = "<group>"; };
@@ -49,6 +50,9 @@
 		4CC71F0621976F78003BBB4A /* WireUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WireUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC71F0A21976F78003BBB4A /* WireUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireUITests.swift; sourceTree = "<group>"; };
 		4CC71F0C21976F78003BBB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CC71F1821977C66003BBB4A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		4CC71F1A219781A2003BBB4A /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		4CC71F1C219788FB003BBB4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +105,12 @@
 			children = (
 				4CC71EE821976F76003BBB4A /* AppDelegate.swift */,
 				4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */,
+				4CC71F1A219781A2003BBB4A /* SettingsTableViewCell.swift */,
 				4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */,
+				4CC71F1821977C66003BBB4A /* TabBarController.swift */,
 				4CC71EEE21976F76003BBB4A /* Main.storyboard */,
 				4CC71EF121976F77003BBB4A /* Assets.xcassets */,
-				4CC71EF321976F77003BBB4A /* LaunchScreen.storyboard */,
+				4CC71F1C219788FB003BBB4A /* GoogleService-Info.plist */,
 				4CC71EF621976F77003BBB4A /* Info.plist */,
 			);
 			path = Wire;
@@ -232,9 +238,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CC71EF521976F77003BBB4A /* LaunchScreen.storyboard in Resources */,
 				4CC71EF221976F77003BBB4A /* Assets.xcassets in Resources */,
 				4CC71EF021976F76003BBB4A /* Main.storyboard in Resources */,
+				4CC71F1D219788FB003BBB4A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +266,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CC71EED21976F76003BBB4A /* SettingsViewController.swift in Sources */,
+				4CC71F1921977C66003BBB4A /* TabBarController.swift in Sources */,
 				4CC71EE921976F76003BBB4A /* AppDelegate.swift in Sources */,
+				4CC71F1B219781A2003BBB4A /* SettingsTableViewCell.swift in Sources */,
 				4CC71EEB21976F76003BBB4A /* PulsesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,14 +311,6 @@
 				4CC71EEF21976F76003BBB4A /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		4CC71EF321976F77003BBB4A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4CC71EF421976F77003BBB4A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
