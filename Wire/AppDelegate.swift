@@ -8,15 +8,24 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
 	var window: UIWindow?
+	var isSignedIn: Bool {
+		get {
+			return Auth.auth().currentUser != nil
+		}
+	}
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		FirebaseApp.configure()
+
+		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+		GIDSignIn.sharedInstance().delegate = self
 		
 		window = UIWindow(frame: UIScreen.main.bounds)
 
@@ -43,6 +52,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+	}
+
+	// Google Sign In
+	@available(iOS 9.0, *)
+	func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+		return GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+	}
+	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+		guard error == nil else {
+			print(error)
+
+			return
+		}
+
+		guard let authentication = user.authentication else { return }
+		let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+
+		Auth.auth().signInAndRetrieveData(with: credential, completion: { (dataResult, error) in
+			guard error == nil else {
+				return
+			}
+		})
 	}
 
 }

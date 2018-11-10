@@ -11,7 +11,7 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-	private let pulsesNavigation = UINavigationController(rootViewController: PulsesViewController())
+	private let pulsesNavigation = UINavigationController(rootViewController: SignInViewController())
 	private let settingsNavigation = UINavigationController(rootViewController: SettingsViewController())
 
     override func viewDidLoad() {
