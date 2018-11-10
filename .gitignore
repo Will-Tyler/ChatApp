@@ -68,4 +68,6 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 Wire/GoogleService-Info.plist
+Pods/
+Podfile.lock
 
