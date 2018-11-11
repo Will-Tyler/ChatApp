@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -65,11 +66,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		return cell
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let alert = UIAlertController(title: "Sign Out", message: "Sign Out has not been implemented.", preferredStyle: .alert)
+		let actions = [
+			0: {
+				let firebaseAuth = Auth.auth()
 
-		alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+				do {
+					try firebaseAuth.signOut()
+				}
+				catch {
+					let alert = UIAlertController(title: "Sign Out", message: "Error signing out: \(error)", preferredStyle: .alert)
 
-		present(alert, animated: true, completion: nil)
+					alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+					self.present(alert, animated: true, completion: nil)
+				}
+			}
+		]
+
+		assert(indexPath.section == 0)
+
+		actions[indexPath.row]?()
 	}
 
 }

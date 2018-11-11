@@ -17,6 +17,12 @@ class PulsesViewController: UIViewController {
 		title = "Pulses"
 
 		view.backgroundColor = .white
+
+		let delegate = UIApplication.shared.delegate as! AppDelegate
+
+		if !delegate.isSignedIn {
+			navigationController!.pushViewController(SignInViewController(), animated: true)
+		}
 	}
 
 }
