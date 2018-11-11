@@ -18,11 +18,7 @@ class PulsesViewController: UIViewController {
 
 		view.backgroundColor = .white
 
-		let delegate = UIApplication.shared.delegate as! AppDelegate
-
-		if !delegate.isSignedIn {
-			navigationController!.pushViewController(SignInViewController(), animated: true)
-		}
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: nil)
 	}
 
 }

@@ -11,13 +11,17 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-	private let pulsesNavigation = UINavigationController(rootViewController: SignInViewController())
-	private let settingsNavigation = UINavigationController(rootViewController: SettingsViewController())
+	private let pulsesNavigation = UINavigationController(rootViewController: PulsesViewController())
+	private let settingsNavigation: UINavigationController = {
+		let controller = UINavigationController(rootViewController: SettingsViewController())
+
+		controller.navigationBar.prefersLargeTitles = true
+
+		return controller
+	}()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-		settingsNavigation.navigationBar.prefersLargeTitles = true
 
 		viewControllers = [pulsesNavigation, settingsNavigation]
     }

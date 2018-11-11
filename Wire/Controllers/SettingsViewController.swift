@@ -72,6 +72,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
 				do {
 					try firebaseAuth.signOut()
+
+					let alert = UIAlertController(title: "Success", message: "Sign out successful.", preferredStyle: .alert)
+
+					alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+					self.present(alert, animated: true, completion: nil)
 				}
 				catch {
 					let alert = UIAlertController(title: "Sign Out", message: "Error signing out: \(error)", preferredStyle: .alert)
@@ -86,6 +92,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		assert(indexPath.section == 0)
 
 		actions[indexPath.row]?()
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 
 }

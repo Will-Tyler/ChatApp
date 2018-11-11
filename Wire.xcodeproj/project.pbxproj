@@ -11,7 +11,6 @@
 		4CC71EE921976F76003BBB4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EE821976F76003BBB4A /* AppDelegate.swift */; };
 		4CC71EEB21976F76003BBB4A /* PulsesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */; };
 		4CC71EED21976F76003BBB4A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */; };
-		4CC71EF021976F76003BBB4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC71EEE21976F76003BBB4A /* Main.storyboard */; };
 		4CC71EF221976F77003BBB4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC71EF121976F77003BBB4A /* Assets.xcassets */; };
 		4CC71F0021976F78003BBB4A /* WireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EFF21976F78003BBB4A /* WireTests.swift */; };
 		4CC71F0B21976F78003BBB4A /* WireUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71F0A21976F78003BBB4A /* WireUITests.swift */; };
@@ -46,7 +45,6 @@
 		4CC71EE821976F76003BBB4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsesViewController.swift; sourceTree = "<group>"; };
 		4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		4CC71EEF21976F76003BBB4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4CC71EF121976F77003BBB4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CC71EF621976F77003BBB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CC71EFB21976F78003BBB4A /* WireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,12 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				4CC71EE821976F76003BBB4A /* AppDelegate.swift */,
-				4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */,
-				4CC71F1A219781A2003BBB4A /* SettingsTableViewCell.swift */,
-				4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */,
-				4CC71F1E21978C60003BBB4A /* SignInViewController.swift */,
-				4CC71F1821977C66003BBB4A /* TabBarController.swift */,
-				4CC71EEE21976F76003BBB4A /* Main.storyboard */,
+				4CCBD04F21989D77004521B1 /* Controllers */,
+				4CCBD05021989D9B004521B1 /* Views */,
 				4CC71EF121976F77003BBB4A /* Assets.xcassets */,
 				4CC71F1C219788FB003BBB4A /* GoogleService-Info.plist */,
 				4CC71EF621976F77003BBB4A /* Info.plist */,
@@ -152,6 +146,25 @@
 				4CC71F0C21976F78003BBB4A /* Info.plist */,
 			);
 			path = WireUITests;
+			sourceTree = "<group>";
+		};
+		4CCBD04F21989D77004521B1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */,
+				4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */,
+				4CC71F1E21978C60003BBB4A /* SignInViewController.swift */,
+				4CC71F1821977C66003BBB4A /* TabBarController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4CCBD05021989D9B004521B1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4CC71F1A219781A2003BBB4A /* SettingsTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A90A25EB28FF3BB1A665BC1A /* Pods */ = {
@@ -287,7 +300,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CC71EF221976F77003BBB4A /* Assets.xcassets in Resources */,
-				4CC71EF021976F76003BBB4A /* Main.storyboard in Resources */,
 				4CC71F1D219788FB003BBB4A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,17 +483,6 @@
 			targetProxy = 4CC71F0721976F78003BBB4A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		4CC71EEE21976F76003BBB4A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4CC71EEF21976F76003BBB4A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4CC71F0D21976F78003BBB4A /* Debug */ = {

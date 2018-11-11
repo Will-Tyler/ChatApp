@@ -30,8 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		window = UIWindow(frame: UIScreen.main.bounds)
 
 		let tabBarController = TabBarController()
+		let navigationController = UINavigationController(rootViewController: tabBarController)
 
-		window!.rootViewController = tabBarController
+		window!.rootViewController = navigationController
+
+		if !isSignedIn {
+			navigationController.pushViewController(SignInViewController(), animated: true)
+		}
+
 		window!.makeKeyAndVisible()
 
 		return true
@@ -56,13 +62,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
 	// Google Sign In
 	@available(iOS 9.0, *)
-	func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+	func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
 		return GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
 	}
 	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
 		guard error == nil else {
-			print(error)
-
+			print(error!)
 			return
 		}
 
@@ -71,6 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
 		Auth.auth().signInAndRetrieveData(with: credential, completion: { (dataResult, error) in
 			guard error == nil else {
+				print(error!)
 				return
 			}
 		})
