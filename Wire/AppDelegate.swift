@@ -20,23 +20,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 			return Auth.auth().currentUser != nil
 		}
 	}
+	private var tabBarController: TabBarController!
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		FirebaseApp.configure()
-
 		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 		GIDSignIn.sharedInstance().delegate = self
-		
+
+//		tabBarController = TabBarController()
+
 		window = UIWindow(frame: UIScreen.main.bounds)
 
-		let tabBarController = TabBarController()
-		let navigationController = UINavigationController(rootViewController: tabBarController)
-
-		window!.rootViewController = navigationController
-
-		if !isSignedIn {
-			navigationController.pushViewController(SignInViewController(), animated: true)
-		}
+//		if isSignedIn {
+//			window!.rootViewController = tabBarController
+//		}
+//		else {
+//			window!.rootViewController = SignInViewController()
+//		}
+		window!.rootViewController = SignInViewController()
 
 		window!.makeKeyAndVisible()
 

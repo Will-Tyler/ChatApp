@@ -17,7 +17,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
 		table.delegate = self
 		table.dataSource = self
-		table.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.cellID)
 
 		return table
 	}()
@@ -53,13 +52,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 			0: "Configure Wire"
 		]
 
-		return names[section]
+		return names[section]!
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 1
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.cellID) as! SettingsTableViewCell
+		let cell = SettingsTableViewCell()
 
 		cell.textLabel!.text = "Sign Out"
 
@@ -80,7 +79,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 					self.present(alert, animated: true, completion: nil)
 				}
 				catch {
-					let alert = UIAlertController(title: "Sign Out", message: "Error signing out: \(error)", preferredStyle: .alert)
+					let alert = UIAlertController(title: "Failure", message: "Error signing out: \(error)", preferredStyle: .alert)
 
 					alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
@@ -89,9 +88,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 			}
 		]
 
-		assert(indexPath.section == 0)
-
-		actions[indexPath.row]?()
+		actions[indexPath.row]!()
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 

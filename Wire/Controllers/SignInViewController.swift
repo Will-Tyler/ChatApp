@@ -13,6 +13,16 @@ import GoogleSignIn
 
 class SignInViewController: UIViewController, GIDSignInUIDelegate {
 
+	private let wireLabel: UILabel = {
+		let label = UILabel()
+
+		label.text = "Wire"
+		label.font = label.font.withSize(64)
+		label.textColor = .white
+		label.textAlignment = .center
+
+		return label
+	}()
 	private let signInButton = GIDSignInButton()
 
 	private func setupInitialLayout() {
@@ -20,22 +30,32 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
 
 		let safeArea = view.safeAreaLayoutGuide
 
+		view.addSubview(wireLabel)
 		view.addSubview(signInButton)
 
 		signInButton.translatesAutoresizingMaskIntoConstraints = false
 		signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		signInButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-		signInButton.heightAnchor.constraint(equalToConstant: 128).isActive = true
+		signInButton.heightAnchor.constraint(equalToConstant: 256).isActive = true
 		signInButton.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.8).isActive = true
+
+		wireLabel.translatesAutoresizingMaskIntoConstraints = false
+		wireLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		wireLabel.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor, constant: -128).isActive = true
+		wireLabel.heightAnchor.constraint(equalToConstant: 128).isActive = true
+		wireLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+	}
+
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		get {
+			return .lightContent
+		}
 	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		view.backgroundColor = .white
-
-		title = "Google Sign-In"
-		tabBarItem.title = "Sign-In"
+		view.backgroundColor = UIColor(red: 0x29 / 255, green: 0x2a / 255, blue: 0x30 / 255, alpha: 1)
 
 		setupInitialLayout()
 
