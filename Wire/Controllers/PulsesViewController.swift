@@ -16,6 +16,7 @@ class PulsesViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 		table.delegate = self
 		table.dataSource = self
+		table.backgroundColor = Colors.background
 
 		return table
 	}()
@@ -39,8 +40,6 @@ class PulsesViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 		title = "Pulses"
 
-		view.backgroundColor = .white
-
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: nil)
 
 		setupInitialLayout()
@@ -51,7 +50,11 @@ class PulsesViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		return 0
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return UITableViewCell()
+		let cell = UITableViewCell()
+
+		cell.backgroundColor = Colors.header
+
+		return cell
 	}
 
 }

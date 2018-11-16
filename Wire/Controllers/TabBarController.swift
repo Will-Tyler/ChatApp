@@ -11,9 +11,9 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-	private let pulsesNavigation = UINavigationController(rootViewController: PulsesViewController())
-	private let settingsNavigation: UINavigationController = {
-		let controller = UINavigationController(rootViewController: SettingsViewController())
+	private let pulsesNavigation = DarkNavigationContoller(rootViewController: PulsesViewController())
+	private let settingsNavigation: DarkNavigationContoller = {
+		let controller = DarkNavigationContoller(rootViewController: SettingsViewController())
 
 		controller.navigationBar.prefersLargeTitles = true
 
@@ -24,6 +24,8 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
 
 		viewControllers = [pulsesNavigation, settingsNavigation]
+
+		tabBar.barTintColor = Colors.tabBar
     }
 
 }

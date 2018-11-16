@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2958F2185F87F2FEFECA7229 /* Pods_WireTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93BA8114EE4C92F440A3A585 /* Pods_WireTests.framework */; };
+		4CBC8405219F23F4001DB328 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8404219F23F4001DB328 /* Colors.swift */; };
+		4CBC8407219F2900001DB328 /* DarkNavigationContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */; };
 		4CC71EE921976F76003BBB4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EE821976F76003BBB4A /* AppDelegate.swift */; };
 		4CC71EEB21976F76003BBB4A /* PulsesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */; };
 		4CC71EED21976F76003BBB4A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */; };
@@ -41,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		3938A1A5C65C39C856AFAB06 /* Pods-WireUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WireUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WireUITests/Pods-WireUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		4CBC8404219F23F4001DB328 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkNavigationContoller.swift; sourceTree = "<group>"; };
 		4CC71EE521976F76003BBB4A /* Wire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC71EE821976F76003BBB4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsesViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				4CC71EE821976F76003BBB4A /* AppDelegate.swift */,
+				4CBC8404219F23F4001DB328 /* Colors.swift */,
 				4CCBD04F21989D77004521B1 /* Controllers */,
 				4CCBD05021989D9B004521B1 /* Views */,
 				4CC71EF121976F77003BBB4A /* Assets.xcassets */,
@@ -151,6 +156,7 @@
 		4CCBD04F21989D77004521B1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */,
 				4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */,
 				4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */,
 				4CC71F1E21978C60003BBB4A /* SignInViewController.swift */,
@@ -447,6 +453,8 @@
 				4CC71F1F21978C60003BBB4A /* SignInViewController.swift in Sources */,
 				4CC71EED21976F76003BBB4A /* SettingsViewController.swift in Sources */,
 				4CC71F1921977C66003BBB4A /* TabBarController.swift in Sources */,
+				4CBC8405219F23F4001DB328 /* Colors.swift in Sources */,
+				4CBC8407219F2900001DB328 /* DarkNavigationContoller.swift in Sources */,
 				4CC71EE921976F76003BBB4A /* AppDelegate.swift in Sources */,
 				4CC71F1B219781A2003BBB4A /* SettingsTableViewCell.swift in Sources */,
 				4CC71EEB21976F76003BBB4A /* PulsesViewController.swift in Sources */,

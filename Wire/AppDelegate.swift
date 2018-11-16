@@ -15,30 +15,15 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
 	var window: UIWindow?
-	var isSignedIn: Bool {
-		get {
-			return Auth.auth().currentUser != nil
-		}
-	}
-	private var tabBarController: TabBarController!
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		FirebaseApp.configure()
+
 		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 		GIDSignIn.sharedInstance().delegate = self
 
-//		tabBarController = TabBarController()
-
 		window = UIWindow(frame: UIScreen.main.bounds)
-
-//		if isSignedIn {
-//			window!.rootViewController = tabBarController
-//		}
-//		else {
-//			window!.rootViewController = SignInViewController()
-//		}
 		window!.rootViewController = SignInViewController()
-
 		window!.makeKeyAndVisible()
 
 		return true
@@ -66,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
 		return GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
 	}
+	func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+		return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+	}
 	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
 		guard error == nil else {
 			print(error!)
@@ -80,7 +68,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 				print(error!)
 				return
 			}
+
+			self.window!.rootViewController = TabBarController()
 		})
+	}
+	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+		self.window!.rootViewController = SignInViewController()
 	}
 
 }

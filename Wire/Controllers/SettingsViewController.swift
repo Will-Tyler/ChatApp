@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -17,6 +18,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
 		table.delegate = self
 		table.dataSource = self
+		table.backgroundColor = Colors.background
 
 		return table
 	}()
@@ -41,7 +43,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		title = "Settings"
 		tabBarItem.title = title!
 
-		view.backgroundColor = .white
+		view.backgroundColor = Colors.background
 
 		setupInitialLayout()
 	}
@@ -61,34 +63,20 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		let cell = SettingsTableViewCell()
 
 		cell.textLabel!.text = "Sign Out"
+		cell.textLabel!.textColor = .red
+		cell.backgroundColor = Colors.header
 
 		return cell
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let actions = [
-			0: {
-				let firebaseAuth = Auth.auth()
+		switch indexPath.row {
+		case 0:
+			GIDSignIn.sharedInstance()!.signOut()
+			present(SignInViewController(), animated: true, completion: nil)
 
-				do {
-					try firebaseAuth.signOut()
+		default: fatalError()
+		}
 
-					let alert = UIAlertController(title: "Success", message: "Sign out successful.", preferredStyle: .alert)
-
-					alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-
-					self.present(alert, animated: true, completion: nil)
-				}
-				catch {
-					let alert = UIAlertController(title: "Failure", message: "Error signing out: \(error)", preferredStyle: .alert)
-
-					alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-
-					self.present(alert, animated: true, completion: nil)
-				}
-			}
-		]
-
-		actions[indexPath.row]!()
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 
