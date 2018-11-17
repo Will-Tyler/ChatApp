@@ -12,7 +12,7 @@
 		4CBC8405219F23F4001DB328 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8404219F23F4001DB328 /* Colors.swift */; };
 		4CBC8407219F2900001DB328 /* DarkNavigationContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */; };
 		4CC71EE921976F76003BBB4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EE821976F76003BBB4A /* AppDelegate.swift */; };
-		4CC71EEB21976F76003BBB4A /* PulsesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */; };
+		4CC71EEB21976F76003BBB4A /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEA21976F76003BBB4A /* ChatsViewController.swift */; };
 		4CC71EED21976F76003BBB4A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */; };
 		4CC71EF221976F77003BBB4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC71EF121976F77003BBB4A /* Assets.xcassets */; };
 		4CC71F0021976F78003BBB4A /* WireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EFF21976F78003BBB4A /* WireTests.swift */; };
@@ -50,7 +50,7 @@
 		4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkNavigationContoller.swift; sourceTree = "<group>"; };
 		4CC71EE521976F76003BBB4A /* Wire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC71EE821976F76003BBB4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsesViewController.swift; sourceTree = "<group>"; };
+		4CC71EEA21976F76003BBB4A /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4CC71EF121976F77003BBB4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CC71EF621976F77003BBB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,13 +160,13 @@
 		4CCBD04F21989D77004521B1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4CC71EEA21976F76003BBB4A /* ChatsViewController.swift */,
 				4CEB354221A081F100F349D5 /* ContactsViewController.swift */,
 				4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */,
-				4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */,
 				4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */,
 				4CC71F1E21978C60003BBB4A /* SignInViewController.swift */,
-				4CC71F1821977C66003BBB4A /* TabBarController.swift */,
 				4CB177D921A0696800E1D0E1 /* SplashViewController.swift */,
+				4CC71F1821977C66003BBB4A /* TabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -466,7 +466,7 @@
 				4CBC8407219F2900001DB328 /* DarkNavigationContoller.swift in Sources */,
 				4CC71EE921976F76003BBB4A /* AppDelegate.swift in Sources */,
 				4CC71F1B219781A2003BBB4A /* SettingsTableViewCell.swift in Sources */,
-				4CC71EEB21976F76003BBB4A /* PulsesViewController.swift in Sources */,
+				4CC71EEB21976F76003BBB4A /* ChatsViewController.swift in Sources */,
 				4CEB354321A081F100F349D5 /* ContactsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

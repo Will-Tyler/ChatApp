@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 				return
 			}
 
-			self.tabBarController.dismiss(animated: true)
+			self.tabBarController.dismissSignInController(animated: true)
 
 			let dataRef = Database.database().reference()
 			let usersRef = dataRef.child("users")
