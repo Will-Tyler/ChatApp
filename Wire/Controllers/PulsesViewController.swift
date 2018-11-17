@@ -14,6 +14,7 @@ class PulsesViewController: UIViewController, UITableViewDelegate, UITableViewDa
 	private lazy var tableView: UITableView = {
 		let table = UITableView()
 
+		table.allowsMultipleSelection = false
 		table.delegate = self
 		table.dataSource = self
 		table.backgroundColor = Colors.background

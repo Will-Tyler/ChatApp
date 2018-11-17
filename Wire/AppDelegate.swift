@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 import GoogleSignIn
 
 
@@ -68,6 +69,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 			}
 
 			self.tabBarController.dismiss(animated: true)
+
+			let dataRef = Database.database().reference()
+			let usersRef = dataRef.child("users")
+			let authUser = Auth.auth().currentUser!
+			let userRef = usersRef.child(authUser.uid)
+
+			userRef.updateChildValues(["email" : authUser.email!])
 		})
 	}
 	// Called when user disconnects. Different from signing out
