@@ -12,7 +12,7 @@
 		4CBC8405219F23F4001DB328 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8404219F23F4001DB328 /* Colors.swift */; };
 		4CBC8407219F2900001DB328 /* DarkNavigationContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */; };
 		4CC71EE921976F76003BBB4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EE821976F76003BBB4A /* AppDelegate.swift */; };
-		4CC71EEB21976F76003BBB4A /* PulsesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */; };
+		4CC71EEB21976F76003BBB4A /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEA21976F76003BBB4A /* ChatsViewController.swift */; };
 		4CC71EED21976F76003BBB4A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */; };
 		4CC71EF221976F77003BBB4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC71EF121976F77003BBB4A /* Assets.xcassets */; };
 		4CC71F0021976F78003BBB4A /* WireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71EFF21976F78003BBB4A /* WireTests.swift */; };
@@ -22,6 +22,7 @@
 		4CC71F1D219788FB003BBB4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CC71F1C219788FB003BBB4A /* GoogleService-Info.plist */; };
 		4CC71F1F21978C60003BBB4A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71F1E21978C60003BBB4A /* SignInViewController.swift */; };
 		4CEB354321A081F100F349D5 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB354221A081F100F349D5 /* ContactsViewController.swift */; };
+		4CF3BCCE21A0B73500E6AD8D /* EmailSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF3BCCD21A0B73500E6AD8D /* EmailSignInViewController.swift */; };
 		7F47FC10685955E8A4432D19 /* Pods_Wire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B545EF400FF219592F6CC9 /* Pods_Wire.framework */; };
 		B16BFB6FEDD09CAA749CDEBC /* Pods_WireUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7D5B9B7D24FDABFD32BB125 /* Pods_WireUITests.framework */; };
 /* End PBXBuildFile section */
@@ -50,7 +51,7 @@
 		4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkNavigationContoller.swift; sourceTree = "<group>"; };
 		4CC71EE521976F76003BBB4A /* Wire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC71EE821976F76003BBB4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsesViewController.swift; sourceTree = "<group>"; };
+		4CC71EEA21976F76003BBB4A /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4CC71EF121976F77003BBB4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CC71EF621976F77003BBB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,6 +66,7 @@
 		4CC71F1C219788FB003BBB4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4CC71F1E21978C60003BBB4A /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4CEB354221A081F100F349D5 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		4CF3BCCD21A0B73500E6AD8D /* EmailSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignInViewController.swift; sourceTree = "<group>"; };
 		7A3C68A2BD84A7C7E6306215 /* Pods-WireTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WireTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WireTests/Pods-WireTests.release.xcconfig"; sourceTree = "<group>"; };
 		85B545EF400FF219592F6CC9 /* Pods_Wire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93BA8114EE4C92F440A3A585 /* Pods_WireTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WireTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,13 +162,14 @@
 		4CCBD04F21989D77004521B1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4CC71EEA21976F76003BBB4A /* ChatsViewController.swift */,
 				4CEB354221A081F100F349D5 /* ContactsViewController.swift */,
 				4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */,
-				4CC71EEA21976F76003BBB4A /* PulsesViewController.swift */,
+				4CF3BCCD21A0B73500E6AD8D /* EmailSignInViewController.swift */,
 				4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */,
 				4CC71F1E21978C60003BBB4A /* SignInViewController.swift */,
-				4CC71F1821977C66003BBB4A /* TabBarController.swift */,
 				4CB177D921A0696800E1D0E1 /* SplashViewController.swift */,
+				4CC71F1821977C66003BBB4A /* TabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -442,6 +446,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,11 +465,12 @@
 				4CC71EED21976F76003BBB4A /* SettingsViewController.swift in Sources */,
 				4CC71F1921977C66003BBB4A /* TabBarController.swift in Sources */,
 				4CB177DA21A0696800E1D0E1 /* SplashViewController.swift in Sources */,
+				4CF3BCCE21A0B73500E6AD8D /* EmailSignInViewController.swift in Sources */,
 				4CBC8405219F23F4001DB328 /* Colors.swift in Sources */,
 				4CBC8407219F2900001DB328 /* DarkNavigationContoller.swift in Sources */,
 				4CC71EE921976F76003BBB4A /* AppDelegate.swift in Sources */,
 				4CC71F1B219781A2003BBB4A /* SettingsTableViewCell.swift in Sources */,
-				4CC71EEB21976F76003BBB4A /* PulsesViewController.swift in Sources */,
+				4CC71EEB21976F76003BBB4A /* ChatsViewController.swift in Sources */,
 				4CEB354321A081F100F349D5 /* ContactsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

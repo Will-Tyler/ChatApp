@@ -17,6 +17,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
 		table.allowsMultipleSelection = false
 		table.delegate = self
 		table.dataSource = self
+		table.backgroundColor = Colors.background
 
 		return table
 	}()
@@ -55,7 +56,11 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
 		return 5
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return UITableViewCell()
+		let cell = UITableViewCell()
+
+		cell.backgroundColor = Colors.header
+
+		return cell
 	}
 
 }

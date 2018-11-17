@@ -9,11 +9,12 @@
 import UIKit
 
 
-class PulsesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ChatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 	private lazy var tableView: UITableView = {
 		let table = UITableView()
 
+		table.allowsMultipleSelection = false
 		table.delegate = self
 		table.dataSource = self
 		table.backgroundColor = Colors.background
@@ -44,7 +45,7 @@ class PulsesViewController: UIViewController, UITableViewDelegate, UITableViewDa
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		title = "Pulses"
+		title = "Chats"
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
 
 		setupInitialLayout()
