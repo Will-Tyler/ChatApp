@@ -13,6 +13,11 @@ import GoogleSignIn
 
 class SignInViewController: UIViewController, GIDSignInUIDelegate {
 
+	var isSignedIn: Bool {
+		get {
+			return GIDSignIn.sharedInstance()!.hasAuthInKeychain()
+		}
+	}
 	private let wireLabel: UILabel = {
 		let label = UILabel()
 

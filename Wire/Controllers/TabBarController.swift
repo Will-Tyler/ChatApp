@@ -13,11 +13,6 @@ import GoogleSignIn
 
 class TabBarController: UITabBarController {
 
-	private var isSignedIn: Bool {
-		get {
-			return GIDSignIn.sharedInstance()!.hasAuthInKeychain()
-		}
-	}
 	private lazy var signInController = SignInViewController()
 	private lazy var pulsesNavigation = DarkNavigationContoller(rootViewController: PulsesViewController())
 	private lazy var contactsNavigation = DarkNavigationContoller(rootViewController: ContactsViewController())
@@ -44,7 +39,7 @@ class TabBarController: UITabBarController {
 		tabBar.barTintColor = Colors.tabBar
     }
 	override func viewDidAppear(_ animated: Bool) {
-		if !isSignedIn {
+		if !signInController.isSignedIn {
 			present(signInController, animated: animated)
 		}
 	}

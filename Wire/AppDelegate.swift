@@ -53,7 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		return GIDSignIn.sharedInstance().handle(url, sourceApplication:options[.sourceApplication] as? String, annotation: [:])
 	}
 	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-		print("Google SignIn method called...")
 		guard error == nil else {
 			print(error!)
 			return
