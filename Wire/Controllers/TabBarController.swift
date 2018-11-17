@@ -11,14 +11,20 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-	private let pulsesNavigation = DarkNavigationContoller(rootViewController: PulsesViewController())
-	private let settingsNavigation: DarkNavigationContoller = {
+	private lazy var pulsesNavigation = DarkNavigationContoller(rootViewController: PulsesViewController())
+	private lazy var settingsNavigation: DarkNavigationContoller = {
 		let controller = DarkNavigationContoller(rootViewController: SettingsViewController())
 
 		controller.navigationBar.prefersLargeTitles = true
 
 		return controller
 	}()
+
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		get {
+			return .lightContent
+		}
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()

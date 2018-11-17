@@ -15,6 +15,14 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
 	var window: UIWindow?
+	private var isSignedIn: Bool {
+		get {
+			return Auth.auth().currentUser != nil
+		}
+	}
+	private lazy var splashController = SplashViewController()
+	private lazy var signInController = SignInViewController()
+	private lazy var tabBarController = TabBarController()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		FirebaseApp.configure()
@@ -22,8 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 		GIDSignIn.sharedInstance().delegate = self
 
+		addAuthStateListener()
+
 		window = UIWindow(frame: UIScreen.main.bounds)
-		window!.rootViewController = SignInViewController()
+		window!.rootViewController = splashController
 		window!.makeKeyAndVisible()
 
 		return true
@@ -46,6 +56,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
 
+	private func addAuthStateListener() {
+		Auth.auth().addStateDidChangeListener ({ (auth, user) in
+			if user != nil {
+				self.window!.rootViewController = self.tabBarController
+			}
+			else {
+				self.window!.rootViewController = self.signInController
+			}
+		})
+	}
+
 	// Google Sign In
 	@available(iOS 9.0, *)
 	func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
@@ -60,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 			return
 		}
 
-		guard let authentication = user.authentication else { return }
+		let authentication = user.authentication!
 		let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
 
 		Auth.auth().signInAndRetrieveData(with: credential, completion: { (dataResult, error) in
@@ -68,12 +89,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 				print(error!)
 				return
 			}
-
-			self.window!.rootViewController = TabBarController()
 		})
 	}
 	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-		self.window!.rootViewController = SignInViewController()
 	}
 
 }

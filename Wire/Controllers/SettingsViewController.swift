@@ -37,6 +37,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
 	}
 
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		get {
+			return .lightContent
+		}
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
@@ -72,7 +78,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		switch indexPath.row {
 		case 0:
 			GIDSignIn.sharedInstance()!.signOut()
-			present(SignInViewController(), animated: true, completion: nil)
 
 		default: fatalError()
 		}

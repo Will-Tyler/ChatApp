@@ -10,6 +10,12 @@ import UIKit
 
 class DarkNavigationContoller: UINavigationController {
 
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		get {
+			return .lightContent
+		}
+	}
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -56,7 +56,6 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
 
 		GIDSignIn.sharedInstance().uiDelegate = self
-		GIDSignIn.sharedInstance().signIn()
 
 		view.backgroundColor = Colors.background
 

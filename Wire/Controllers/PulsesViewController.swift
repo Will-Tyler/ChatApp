@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 class PulsesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -33,6 +34,12 @@ class PulsesViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		tableView.leftAnchor.constraint(equalTo: safeArea.leftAnchor).isActive = true
 		tableView.rightAnchor.constraint(equalTo: safeArea.rightAnchor).isActive = true
 		tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
+	}
+
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		get {
+			return .lightContent
+		}
 	}
 
 	override func viewDidLoad() {
