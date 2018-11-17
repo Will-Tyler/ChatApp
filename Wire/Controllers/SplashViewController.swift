@@ -16,6 +16,7 @@ class SplashViewController: UIViewController {
 
 		label.text = "Wire"
 		label.font = label.font.withSize(64)
+		label.textColor = .white
 		label.textAlignment = .center
 
 		return label
@@ -35,10 +36,18 @@ class SplashViewController: UIViewController {
 		wireLabel.heightAnchor.constraint(equalToConstant: wireLabel.intrinsicContentSize.height).isActive = true
 	}
 
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		get {
+			return .lightContent
+		}
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		view.backgroundColor = Colors.background
+
+		setupInitialLayout()
 	}
 
 }

@@ -55,29 +55,41 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 
 	// TableView
+	private let names = [
+		0: "Configure Wire"
+	]
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		let names = [
-			0: "Configure Wire"
-		]
-
 		return names[section]!
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 1
+		return 2
 	}
+	private let texts = [
+		0: [
+			0: "Disconnect Google",
+			1: "Sign Out"
+		]
+	]
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = SettingsTableViewCell()
 
-		cell.textLabel!.text = "Sign Out"
+		cell.textLabel!.text = texts[indexPath.section]![indexPath.row]!
 		cell.textLabel!.textColor = .red
 		cell.backgroundColor = Colors.header
 
 		return cell
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let tbc = tabBarController! as! TabBarController
+
 		switch indexPath.row {
 		case 0:
+			GIDSignIn.sharedInstance()!.disconnect()
+			tbc.presentSignInController(animated: true)
+
+		case 1:
 			GIDSignIn.sharedInstance()!.signOut()
+			tbc.presentSignInController(animated: true)
 
 		default: fatalError()
 		}

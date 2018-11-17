@@ -15,13 +15,6 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
 	var window: UIWindow?
-	private var isSignedIn: Bool {
-		get {
-			return Auth.auth().currentUser != nil
-		}
-	}
-	private lazy var splashController = SplashViewController()
-	private lazy var signInController = SignInViewController()
 	private lazy var tabBarController = TabBarController()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -30,10 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 		GIDSignIn.sharedInstance().delegate = self
 
-		addAuthStateListener()
-
 		window = UIWindow(frame: UIScreen.main.bounds)
-		window!.rootViewController = splashController
+		window!.rootViewController = tabBarController
 		window!.makeKeyAndVisible()
 
 		return true
@@ -56,26 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
 
-	private func addAuthStateListener() {
-		Auth.auth().addStateDidChangeListener ({ (auth, user) in
-			if user != nil {
-				self.window!.rootViewController = self.tabBarController
-			}
-			else {
-				self.window!.rootViewController = self.signInController
-			}
-		})
-	}
-
 	// Google Sign In
 	@available(iOS 9.0, *)
 	func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
-		return GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
-	}
-	func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-		return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+		return GIDSignIn.sharedInstance().handle(url, sourceApplication:options[.sourceApplication] as? String, annotation: [:])
 	}
 	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+		print("Google SignIn method called...")
 		guard error == nil else {
 			print(error!)
 			return
@@ -89,8 +67,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 				print(error!)
 				return
 			}
+
+			self.tabBarController.dismiss(animated: true)
 		})
 	}
+	// Called when user disconnects. Different from signing out
 	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
 	}
 

@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 
 class TabBarController: UITabBarController {
 
+	private var isSignedIn: Bool {
+		get {
+			return GIDSignIn.sharedInstance()!.hasAuthInKeychain()
+		}
+	}
+	private lazy var signInController = SignInViewController()
 	private lazy var pulsesNavigation = DarkNavigationContoller(rootViewController: PulsesViewController())
 	private lazy var settingsNavigation: DarkNavigationContoller = {
 		let controller = DarkNavigationContoller(rootViewController: SettingsViewController())
@@ -30,8 +38,18 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
 
 		viewControllers = [pulsesNavigation, settingsNavigation]
+		selectedViewController = pulsesNavigation
 
 		tabBar.barTintColor = Colors.tabBar
     }
+	override func viewDidAppear(_ animated: Bool) {
+		if !isSignedIn {
+			present(signInController, animated: animated)
+		}
+	}
+
+	func presentSignInController(animated: Bool) {
+		present(signInController, animated: animated)
+	}
 
 }
