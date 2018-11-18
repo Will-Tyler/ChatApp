@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 
 class SignInViewController: UIViewController {
@@ -272,6 +273,14 @@ class SignInViewController: UIViewController {
 					self.alertUser(title: "Error Signing In", message: error!.localizedDescription)
 					return
 				}
+
+				let authData = authDataResult!
+				let user = authData.user
+				let dataRef = Database.database().reference()
+				let usersRef = dataRef.child("users")
+				let userRef = usersRef.child(user.uid)
+
+				userRef.updateChildValues(["name": displayName, "email": email])
 
 				tabBarController.dismiss(animated: true)
 			})
