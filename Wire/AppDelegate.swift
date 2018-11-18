@@ -9,20 +9,16 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
-import GoogleSignIn
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	private lazy var tabBarController = TabBarController()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		FirebaseApp.configure()
-
-		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-		GIDSignIn.sharedInstance().delegate = self
 
 		window = UIWindow(frame: UIScreen.main.bounds)
 		window!.rootViewController = tabBarController
@@ -46,40 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	}
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-	}
-
-	// Google Sign In
-	@available(iOS 9.0, *)
-	func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
-		return GIDSignIn.sharedInstance().handle(url, sourceApplication:options[.sourceApplication] as? String, annotation: [:])
-	}
-	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-		guard error == nil else {
-			print(error!)
-			return
-		}
-
-		let authentication = user.authentication!
-		let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-
-		Auth.auth().signInAndRetrieveData(with: credential, completion: { (dataResult, error) in
-			guard error == nil else {
-				print(error!)
-				return
-			}
-
-			self.tabBarController.dismissSignInController(animated: true)
-
-			let dataRef = Database.database().reference()
-			let usersRef = dataRef.child("users")
-			let authUser = Auth.auth().currentUser!
-			let userRef = usersRef.child(authUser.uid)
-
-			userRef.updateChildValues(["email" : authUser.email!])
-		})
-	}
-	// Called when user disconnects. Different from signing out
-	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
 	}
 
 }

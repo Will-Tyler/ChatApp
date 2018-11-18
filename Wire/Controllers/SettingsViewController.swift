@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import GoogleSignIn
+import Firebase
 
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -61,12 +61,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		return names[section]!
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 2
+		return texts[section]!.count
 	}
 	private let texts = [
 		0: [
-			0: "Disconnect Google",
-			1: "Sign Out"
+			0: "Sign Out"
 		]
 	]
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,11 +82,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
 		switch indexPath.row {
 		case 0:
-			GIDSignIn.sharedInstance()!.disconnect()
-			tbc.presentSignInController(animated: true)
+			do {
+				try Auth.auth().signOut()
+			}
+			catch let error {
+				alertUser(title: "Error Signing Out", message: error.localizedDescription)
+			}
 
-		case 1:
-			GIDSignIn.sharedInstance()!.signOut()
 			tbc.presentSignInController(animated: true)
 
 		default: fatalError()

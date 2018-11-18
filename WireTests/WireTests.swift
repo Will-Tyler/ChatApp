@@ -9,26 +9,65 @@
 import XCTest
 @testable import Wire
 
+
 class WireTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+	func testIsValidPassword() {
+		var pass = ""
+		XCTAssertFalse(pass.isValidPassword)
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+		pass = "0"
+		XCTAssertFalse(pass.isValidPassword)
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+		pass = "1234567"
+		XCTAssertFalse(pass.isValidPassword)
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+		pass = "12345678"
+		XCTAssertFalse(pass.isValidPassword)
+
+		pass = "abcdefgh"
+		XCTAssertFalse(pass.isValidPassword)
+
+		pass = "abcdefg8"
+		XCTAssertFalse(pass.isValidPassword)
+
+		pass = "123456789aBcdefg"
+		XCTAssertTrue(pass.isValidPassword)
+
+		pass.append("0")
+		XCTAssertFalse(pass.isValidPassword)
+
+		pass = "123 56789"
+		XCTAssertFalse(pass.isValidPassword)
+
+		pass = " 23456789"
+		XCTAssertFalse(pass.isValidPassword)
+
+		pass = "12345678 "
+		XCTAssertFalse(pass.isValidPassword)
+
+		pass = "124452gba3"
+		XCTAssertFalse(pass.isValidPassword)
+	}
+
+	private func testValidName(name: String, _ expected: Bool) {
+		if expected {
+			XCTAssertTrue(name.isValidDisplayName)
+		}
+		else {
+			XCTAssertFalse(name.isValidDisplayName)
+		}
+	}
+
+	func testValidDisplayName() {
+		testValidName(name: "Will Tyler", true)
+		testValidName(name: "", false)
+		testValidName(name: "Will  Tyler", false)
+		testValidName(name: " Will Tyler", false)
+		testValidName(name: "Will Tyler ", false)
+		testValidName(name: "Will", false)
+		testValidName(name: "Wi Ty", false)
+		testValidName(name: "Wil Tyl", true)
+	}
 
 }
