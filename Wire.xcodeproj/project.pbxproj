@@ -13,6 +13,7 @@
 		4C35095421A72A5100B7500D /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35095321A72A5100B7500D /* TextFieldTableViewCell.swift */; };
 		4C35095621A72CF900B7500D /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35095521A72CF900B7500D /* NSLayoutConstraint.swift */; };
 		4C35095C21A786B500B7500D /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35095B21A786B500B7500D /* UIView.swift */; };
+		4C35095E21A798E900B7500D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35095D21A798E900B7500D /* Array.swift */; };
 		4CB177DA21A0696800E1D0E1 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB177D921A0696800E1D0E1 /* SplashViewController.swift */; };
 		4CBC8405219F23F4001DB328 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8404219F23F4001DB328 /* Colors.swift */; };
 		4CBC8407219F2900001DB328 /* DarkNavigationContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */; };
@@ -58,6 +59,7 @@
 		4C35095321A72A5100B7500D /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		4C35095521A72CF900B7500D /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
 		4C35095B21A786B500B7500D /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		4C35095D21A798E900B7500D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		4CB177D921A0696800E1D0E1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		4CBC8404219F23F4001DB328 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkNavigationContoller.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				4CC71EE821976F76003BBB4A /* AppDelegate.swift */,
+				4C35095D21A798E900B7500D /* Array.swift */,
 				4CBC8404219F23F4001DB328 /* Colors.swift */,
 				4C35095521A72CF900B7500D /* NSLayoutConstraint.swift */,
 				4CF3BCCF21A0D37D00E6AD8D /* String.swift */,
@@ -497,6 +500,7 @@
 				4CF3BCD021A0D37D00E6AD8D /* String.swift in Sources */,
 				4C35095621A72CF900B7500D /* NSLayoutConstraint.swift in Sources */,
 				4CF3BCD321A0E42200E6AD8D /* UIViewController.swift in Sources */,
+				4C35095E21A798E900B7500D /* Array.swift in Sources */,
 				4CBC8407219F2900001DB328 /* DarkNavigationContoller.swift in Sources */,
 				4C35095421A72A5100B7500D /* TextFieldTableViewCell.swift in Sources */,
 				4CC71EE921976F76003BBB4A /* AppDelegate.swift in Sources */,

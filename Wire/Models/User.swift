@@ -11,7 +11,8 @@ import Foundation
 
 struct User {
 
-	let displayName: String
+	let uid: String
+	var displayName: String
 	let email: String
 	
 }

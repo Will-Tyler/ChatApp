@@ -51,19 +51,20 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		view.backgroundColor = Colors.background
 
 		setupInitialLayout()
+		loadUsers()
 		observeUsers()
 	}
 
-	private func observeUsers() {
+	private func loadUsers() {
 		let dataRef = Database.database().reference()
 		let usersRef = dataRef.child("users")
 
-		usersRef.observe(.value, with: { (snapshot) in
+		usersRef.observeSingleEvent(of: .value, with: { (snapshot) in
 			let dict = snapshot.value as! [String: Any]
 
-			for (_, value) in dict {
+			for (key, value) in dict {
 				let values = value as! [String: String]
-				let user = User(displayName: values["name"]!, email: values["email"]!)
+				let user = User(uid: key, displayName: values["name"]!, email: values["email"]!)
 
 				let count = self.users.count
 				var insertIndex = 0
@@ -79,6 +80,24 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
 					self.users.append(user)
 				}
 			}
+
+			self.usersTableView.reloadData()
+		})
+	}
+	private func observeUsers() {
+		let dataRef = Database.database().reference()
+		let usersRef = dataRef.child("users")
+
+		usersRef.observe(.childChanged, with: { (snapshot) in
+			print(snapshot.key)
+
+			let updatedUID = snapshot.key
+			let index = self.users.firstIndex(where: { $0.uid == updatedUID })!
+			let values = snapshot.value as! [String: String]
+			var user = self.users[index]
+
+			user.displayName = values["name"]!
+			self.users.replace(at: index, with: user)
 
 			self.usersTableView.reloadData()
 		})
