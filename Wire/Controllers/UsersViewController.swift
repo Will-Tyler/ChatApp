@@ -99,7 +99,9 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			user.displayName = values["name"]!
 			self.users.replace(at: index, with: user)
 
-			self.usersTableView.reloadData()
+			let path = IndexPath(row: index, section: 0)
+
+			self.usersTableView.reloadRows(at: [path], with: .automatic)
 		})
 	}
 
