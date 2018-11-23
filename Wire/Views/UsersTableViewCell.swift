@@ -12,5 +12,12 @@ import UIKit
 class UsersTableViewCell: UITableViewCell {
 
 	static let cellID = "UsersTableViewCell"
+
+	override func layoutSubviews() {
+		super.layoutSubviews()
+
+		backgroundColor = Colors.cell
+		textLabel!.textColor = .white
+	}
 	
 }

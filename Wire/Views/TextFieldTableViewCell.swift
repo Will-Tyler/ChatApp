@@ -48,7 +48,7 @@ class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 
-		backgroundColor = Colors.background
+		backgroundColor = Colors.cell
 
 		setupInitialLayout()
 	}

@@ -15,6 +15,7 @@ struct Colors {
 	static let header = UIColor(white: 0x34)
 	static let tabBar = UIColor(white: 55)
 	static let navigationBar = UIColor(white: 55)
+	static let cell = UIColor(white: 0x34)
 
 }
 

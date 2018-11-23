@@ -13,4 +13,10 @@ class SettingsTableViewCell: UITableViewCell {
 
 	static let cellID = "SettingsCell"
 
+	override func layoutSubviews() {
+		super.layoutSubviews()
+
+		backgroundColor = Colors.cell
+	}
+
 }

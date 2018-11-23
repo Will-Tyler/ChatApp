@@ -115,9 +115,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		let cell = tableView.dequeueReusableCell(withIdentifier: UsersTableViewCell.cellID, for: indexPath) as! UsersTableViewCell
 		let user = users[indexPath.row]
 
-		cell.backgroundColor = Colors.header
 		cell.textLabel!.text = user.displayName
-		cell.textLabel!.textColor = .white
 
 		return cell
 	}

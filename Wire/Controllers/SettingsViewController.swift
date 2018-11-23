@@ -109,7 +109,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
 			cell.textLabel!.text = cellTexts[indexPath.section]![indexPath.row]!
 			cell.textLabel!.textColor = .red
-			cell.backgroundColor = Colors.header
 
 			return cell
 		}
