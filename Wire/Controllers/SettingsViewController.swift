@@ -54,45 +54,68 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 
 	// TableView
-	private let names = [
-		0: "Configure Wire"
+	private let sectionNames = [
+		0: "Display Name",
+		1: "Configure Wire"
 	]
-	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return names[section]!
-	}
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return texts[section]!.count
-	}
-	private let texts = [
+	private let cellTexts = [
 		0: [
+			0: "" // Display name cell
+		],
+		1: [
 			0: "Sign Out"
 		]
 	]
+	private lazy var cellActions = [
+		0: [
+			0: {}
+		],
+		1: [
+			0: {
+				let tbc = self.tabBarController! as! TabBarController
+
+				do {
+					try Auth.auth().signOut()
+				}
+				catch let error {
+					self.alertUser(title: "Error Signing Out", message: error.localizedDescription)
+				}
+
+				tbc.presentSignInController(animated: true)
+			}
+		]
+	]
+
+	func numberOfSections(in tableView: UITableView) -> Int {
+		if tableView === self.tableView {
+			return 2
+		}
+		else {
+			fatalError()
+		}
+	}
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return sectionNames[section]!
+	}
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return cellTexts[section]!.count
+	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = SettingsTableViewCell()
+		if indexPath.section == 0, indexPath.row == 0 {
+			return TextFieldTableViewCell()
+		}
+		else {
+			let cell = SettingsTableViewCell()
 
-		cell.textLabel!.text = texts[indexPath.section]![indexPath.row]!
-		cell.textLabel!.textColor = .red
-		cell.backgroundColor = Colors.header
+			cell.textLabel!.text = cellTexts[indexPath.section]![indexPath.row]!
+			cell.textLabel!.textColor = .red
+			cell.backgroundColor = Colors.header
 
-		return cell
+			return cell
+		}
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let tbc = tabBarController! as! TabBarController
-
-		switch indexPath.row {
-		case 0:
-			do {
-				try Auth.auth().signOut()
-			}
-			catch let error {
-				alertUser(title: "Error Signing Out", message: error.localizedDescription)
-			}
-
-			tbc.presentSignInController(animated: true)
-
-		default: fatalError()
-		}
+		cellActions[indexPath.section]![indexPath.row]!()
 
 		tableView.deselectRow(at: indexPath, animated: true)
 	}

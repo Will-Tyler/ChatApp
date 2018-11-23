@@ -160,6 +160,15 @@ class SignInViewController: UIViewController {
 		view.backgroundColor = Colors.background
 
 		setupInitialLayout()
+
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(endEditing))
+
+		view.addGestureRecognizer(tapRecognizer)
+	}
+
+	@objc
+	private func endEditing() {
+		view.endEditing(true)
 	}
 
 	private var mode: Mode {
