@@ -55,6 +55,8 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 
 		view.backgroundColor = Colors.background
 
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+
 		setupInitialLayout()
 		loadContacts()
 	}
@@ -70,7 +72,10 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 		let contactsRef = dataRef.child("users/\(uid)/contacts")
 
 		contactsRef.observeSingleEvent(of: .value, with: { (snapshot) in
-			let contactIDs = snapshot.value as! [String]
+			guard let contactIDs = snapshot.value as? [String] else {
+				// User probably doesn't have any contacts yet.
+				return
+			}
 
 			for contactID in contactIDs {
 				let contactRef = dataRef.child("users/\(contactID)")
@@ -89,32 +94,6 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 			self.alertUser(title: "Error Loading Contacts", message: error.localizedDescription)
 		})
 	}
-
-//		usersRef.observeSingleEvent(of: .value, with: { (snapshot) in
-//			let dict = snapshot.value as! [String: Any]
-//
-//			for (key, value) in dict {
-//				let values = value as! [String: String]
-//				let user = User(uid: key, displayName: values["name"]!, email: values["email"]!)
-//
-//				let count = self.contacts.count
-//				var insertIndex = 0
-//
-//				while insertIndex < count, self.contacts[insertIndex].displayName < user.displayName {
-//					insertIndex += 1
-//				}
-//
-//				if insertIndex < count {
-//					self.contacts.insert(user, at: insertIndex)
-//				}
-//				else {
-//					self.contacts.append(user)
-//				}
-//			}
-//
-//			self.usersTableView.reloadData()
-//		})
-//	}
 
 	// Table View
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

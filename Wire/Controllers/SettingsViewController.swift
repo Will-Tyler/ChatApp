@@ -82,6 +82,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 				}
 				catch let error {
 					self.alertUser(title: "Error Signing Out", message: error.localizedDescription)
+
+					return
 				}
 
 				tbc.presentSignInController(animated: true)
