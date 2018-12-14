@@ -79,30 +79,29 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 	private var contacts = [User]()
 
 	private func loadContacts() {
-		guard let uid = Auth.auth().currentUser?.uid else {
-			return
-		}
-
-		let dataRef = Database.database().reference()
-		let contactsRef = dataRef.child("users/\(uid)/contacts")
-
 		contactsRef.observeSingleEvent(of: .value, with: { (snapshot) in
-			guard let contactIDs = snapshot.value as? [String] else {
-				// User probably doesn't have any contacts yet.
-				return
-			}
+			let usersRef = Database.database().reference().child("users")
 
-			for contactID in contactIDs {
-				let contactRef = dataRef.child("users/\(contactID)")
+			for child in snapshot.children {
+				guard let childSnapshot = child as? DataSnapshot else {
+					continue
+				}
+				let contactQuery = usersRef.queryOrderedByKey().queryEqual(toValue: childSnapshot.value)
 
-				contactRef.observeSingleEvent(of: .value, with: { (snapshot) in
-					let properties = snapshot.value as! [String: Any]
-					let contact = User(id: contactID, properties: properties)
+				contactQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+					guard let contactDict = snapshot.value as? [String: Any] else {
+						return
+					}
 
-					self.contacts.append(contact)
-					self.contactsTableView.reloadData()
-				}, withCancel: { (error) in
-					print(error.localizedDescription)
+					assert(contactDict.count == 1)
+
+					for (key, value) in contactDict {
+						let contact = User(id: key, properties: value as! [String: Any])
+						let indexPath = IndexPath(row: self.contacts.count, section: 0)
+
+						self.contacts.append(contact)
+						self.contactsTableView.insertRows(at: [indexPath], with: .automatic)
+					}
 				})
 			}
 		}, withCancel: { (error) in
