@@ -27,10 +27,15 @@ extension Array {
 		return indices
 	}
 
-	mutating func remove(at indices: [Int]) {
+	@discardableResult
+	mutating func remove(at indices: [Int]) -> [Element] {
+		var removed = [Element]()
+
 		for index in indices {
-			remove(at: index)
+			removed.append(remove(at: index))
 		}
+
+		return removed
 	}
 
 }

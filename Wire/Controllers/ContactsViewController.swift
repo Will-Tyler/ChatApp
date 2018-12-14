@@ -217,5 +217,31 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		contactsTableView.deselectRow(at: indexPath, animated: true)
 	}
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if (editingStyle == .delete) {
+			let removed = contacts.remove(at: indexPath.row)
+
+			contactsTableView.deleteRows(at: [indexPath], with: .automatic)
+
+			let contactQuery = contactsRef.queryOrderedByValue().queryEqual(toValue: removed.uid)
+
+			contactQuery.observeSingleEvent(of: .value, with: { snapshot in
+				guard let contactDict = snapshot.value as? [String: String] else {
+					return
+				}
+
+				assert(contactDict.count == 1)
+
+				for (key, _) in contactDict {
+					let contactRef = self.contactsRef.child(key)
+
+					contactRef.removeValue()
+				}
+			})
+		}
+	}
 
 }
