@@ -41,12 +41,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 			return .lightContent
 		}
 	}
+	override var title: String? {
+		get {
+			return "Settings"
+		}
+		set {}
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		title = "Settings"
-		tabBarItem.title = title!
 
 		view.backgroundColor = Colors.background
 

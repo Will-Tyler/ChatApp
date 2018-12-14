@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ChatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+final class ChatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 	private lazy var tableView: UITableView = {
 		let table = UITableView()
@@ -41,11 +41,16 @@ class ChatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			return .lightContent
 		}
 	}
+	override var title: String? {
+		get {
+			return "Chats"
+		}
+		set {}
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		title = "Chats"
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
 
 		setupInitialLayout()

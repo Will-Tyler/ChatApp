@@ -43,11 +43,16 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			return .lightContent
 		}
 	}
+	override var title: String? {
+		get {
+			return "Users"
+		}
+		set {}
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		title = "Users"
 		view.backgroundColor = Colors.background
 
 		setupInitialLayout()
