@@ -15,4 +15,22 @@ extension Array {
 		replaceSubrange(index..<index+1, with: [new])
 	}
 
+	func indices(where condition: (Element)->Bool) -> [Int] {
+		var indices = [Int]()
+
+		for index in 0..<count {
+			if condition(self[index]) {
+				indices.append(index)
+			}
+		}
+
+		return indices
+	}
+
+	mutating func remove(at indices: [Int]) {
+		for index in indices {
+			remove(at: index)
+		}
+	}
+
 }

@@ -72,40 +72,83 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 		navigationItem.setRightBarButton(addItem, animated: true)
 
 		setupInitialLayout()
-		loadContacts()
+//		loadContacts()
+		observeContacts()
 	}
 
 	private let contactsRef = Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/contacts")
 	private var contacts = [User]()
 
-	private func loadContacts() {
-		contactsRef.observeSingleEvent(of: .value, with: { (snapshot) in
-			let usersRef = Database.database().reference().child("users")
+//	private func loadContacts() {
+//		contactsRef.observeSingleEvent(of: .value, with: { (snapshot) in
+//			let usersRef = Database.database().reference().child("users")
+//
+//			for child in snapshot.children {
+//				guard let childSnapshot = child as? DataSnapshot else {
+//					continue
+//				}
+//				let contactQuery = usersRef.queryOrderedByKey().queryEqual(toValue: childSnapshot.value)
+//
+//				contactQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+//					guard let contactDict = snapshot.value as? [String: Any] else {
+//						// Couldn't find contact.
+//						// Let's see if we can delete it.
+//						self.contactsRef.child(childSnapshot.key).removeValue()
+//
+//						return
+//					}
+//
+//					assert(contactDict.count == 1)
+//
+//					for (key, value) in contactDict {
+//						let contact = User(id: key, properties: value as! [String: Any])
+//						let indexPath = IndexPath(row: self.contacts.count, section: 0)
+//
+//						self.contacts.append(contact)
+//						self.contactsTableView.insertRows(at: [indexPath], with: .automatic)
+//					}
+//				})
+//			}
+//		}, withCancel: { (error) in
+//			self.alertUser(title: "Error Loading Contacts", message: error.localizedDescription)
+//		})
+//	}
 
-			for child in snapshot.children {
-				guard let childSnapshot = child as? DataSnapshot else {
-					continue
-				}
-				let contactQuery = usersRef.queryOrderedByKey().queryEqual(toValue: childSnapshot.value)
-
-				contactQuery.observeSingleEvent(of: .value, with: { (snapshot) in
-					guard let contactDict = snapshot.value as? [String: Any] else {
-						return
-					}
-
-					assert(contactDict.count == 1)
-
-					for (key, value) in contactDict {
-						let contact = User(id: key, properties: value as! [String: Any])
-						let indexPath = IndexPath(row: self.contacts.count, section: 0)
-
-						self.contacts.append(contact)
-						self.contactsTableView.insertRows(at: [indexPath], with: .automatic)
-					}
-				})
+	private func observeContacts() {
+		contactsRef.observe(.childAdded, with: { snapshot in
+			guard let contactID = snapshot.value as? String else {
+				return
 			}
-		}, withCancel: { (error) in
-			self.alertUser(title: "Error Loading Contacts", message: error.localizedDescription)
+
+			let usersRef = Database.database().reference().child("users")
+			let contactQuery = usersRef.queryOrderedByKey().queryEqual(toValue: contactID)
+
+			contactQuery.observeSingleEvent(of: .value, with: { snapshot in
+				guard let contactDict = snapshot.value as? [String: Any] else {
+					return
+				}
+
+				assert(contactDict.count == 1)
+
+				for (key, value) in contactDict {
+					let contact = User(id: key, properties: value as! [String: Any])
+					let indexPath = IndexPath(row: self.contacts.count, section: 0)
+
+					self.contacts.append(contact)
+					self.contactsTableView.insertRows(at: [indexPath], with: .automatic)
+				}
+			})
+		})
+
+		contactsRef.observe(.childRemoved, with: { snapshot in
+			guard let removedUID = snapshot.value as? String else {
+				return
+			}
+			let indices = self.contacts.indices(where: { $0.uid == removedUID })
+			let indexPaths = indices.map({ return IndexPath(row: $0, section: 0) })
+
+			self.contacts.remove(at: indices)
+			self.contactsTableView.deleteRows(at: indexPaths, with: .automatic)
 		})
 	}
 
@@ -153,11 +196,8 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 
 			for (key, value) in users {
 				let user = User(id: key, properties: value as! [String: Any])
-				let indexPath = IndexPath(row: self.contacts.count, section: 0)
 
-				self.contacts.append(user)
 				self.contactsRef.childByAutoId().setValue(user.uid)
-				self.contactsTableView.insertRows(at: [indexPath], with: .automatic)
 			}
 		})
 	}
