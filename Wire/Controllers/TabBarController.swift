@@ -14,7 +14,7 @@ class TabBarController: UITabBarController {
 
 	private lazy var signInController = SignInViewController()
 	private lazy var pulsesNavigation = DarkNavigationContoller(rootViewController: ChatsViewController())
-	private lazy var contactsNavigation = DarkNavigationContoller(rootViewController: UsersViewController())
+	private lazy var contactsNavigation = DarkNavigationContoller(rootViewController: ContactsViewController())
 	private lazy var settingsNavigation: DarkNavigationContoller = {
 		let controller = DarkNavigationContoller(rootViewController: SettingsViewController())
 

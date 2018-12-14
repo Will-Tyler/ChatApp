@@ -14,5 +14,11 @@ struct User {
 	let uid: String
 	var displayName: String
 	let email: String
+
+	init(id: String, properties: [String: Any]) {
+		self.uid = id
+		self.displayName = properties["name"] as! String
+		self.email = properties["email"] as! String
+	}
 	
 }

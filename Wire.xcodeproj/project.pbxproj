@@ -26,7 +26,7 @@
 		4CC71F1921977C66003BBB4A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71F1821977C66003BBB4A /* TabBarController.swift */; };
 		4CC71F1B219781A2003BBB4A /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC71F1A219781A2003BBB4A /* SettingsTableViewCell.swift */; };
 		4CC71F1D219788FB003BBB4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CC71F1C219788FB003BBB4A /* GoogleService-Info.plist */; };
-		4CEB354321A081F100F349D5 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB354221A081F100F349D5 /* UsersViewController.swift */; };
+		4CEB354321A081F100F349D5 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB354221A081F100F349D5 /* ContactsViewController.swift */; };
 		4CF3BCCE21A0B73500E6AD8D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF3BCCD21A0B73500E6AD8D /* SignInViewController.swift */; };
 		4CF3BCD021A0D37D00E6AD8D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF3BCCF21A0D37D00E6AD8D /* String.swift */; };
 		4CF3BCD121A0DD8200E6AD8D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF3BCCF21A0D37D00E6AD8D /* String.swift */; };
@@ -78,7 +78,7 @@
 		4CC71F1821977C66003BBB4A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4CC71F1A219781A2003BBB4A /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		4CC71F1C219788FB003BBB4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4CEB354221A081F100F349D5 /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		4CEB354221A081F100F349D5 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		4CF3BCCD21A0B73500E6AD8D /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4CF3BCCF21A0D37D00E6AD8D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4CF3BCD221A0E42200E6AD8D /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -192,12 +192,12 @@
 			isa = PBXGroup;
 			children = (
 				4CC71EEA21976F76003BBB4A /* ChatsViewController.swift */,
+				4CEB354221A081F100F349D5 /* ContactsViewController.swift */,
 				4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */,
 				4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */,
 				4CF3BCCD21A0B73500E6AD8D /* SignInViewController.swift */,
 				4CB177D921A0696800E1D0E1 /* SplashViewController.swift */,
 				4CC71F1821977C66003BBB4A /* TabBarController.swift */,
-				4CEB354221A081F100F349D5 /* UsersViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -508,7 +508,7 @@
 				4C35095C21A786B500B7500D /* UIView.swift in Sources */,
 				4CC71F1B219781A2003BBB4A /* SettingsTableViewCell.swift in Sources */,
 				4CC71EEB21976F76003BBB4A /* ChatsViewController.swift in Sources */,
-				4CEB354321A081F100F349D5 /* UsersViewController.swift in Sources */,
+				4CEB354321A081F100F349D5 /* ContactsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
