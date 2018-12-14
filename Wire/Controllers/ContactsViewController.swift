@@ -153,9 +153,11 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 
 			for (key, value) in users {
 				let user = User(id: key, properties: value as! [String: Any])
+				let indexPath = IndexPath(row: self.contacts.count, section: 0)
 
 				self.contacts.append(user)
 				self.contactsRef.childByAutoId().setValue(user.uid)
+				self.contactsTableView.insertRows(at: [indexPath], with: .automatic)
 			}
 		})
 	}
