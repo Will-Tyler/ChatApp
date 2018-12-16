@@ -11,7 +11,7 @@ import UIKit
 
 class SettingsTableViewCell: UITableViewCell {
 
-	static let cellID = "SettingsCell"
+	static let cellID = "SettingsTableViewCell"
 
 	override func layoutSubviews() {
 		super.layoutSubviews()

@@ -32,6 +32,9 @@
 		4CF3BCD121A0DD8200E6AD8D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF3BCCF21A0D37D00E6AD8D /* String.swift */; };
 		4CF3BCD321A0E42200E6AD8D /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF3BCD221A0E42200E6AD8D /* UIViewController.swift */; };
 		4CF85C3C21C425ED003A6855 /* AddContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF85C3B21C425ED003A6855 /* AddContactView.swift */; };
+		4CFD2C9621C699E7009D582E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFD2C9521C699E7009D582E /* Message.swift */; };
+		4CFD2C9821C69B7A009D582E /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFD2C9721C69B7A009D582E /* Chat.swift */; };
+		4CFD2C9B21C69D6C009D582E /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFD2C9A21C69D6C009D582E /* ChatTableViewCell.swift */; };
 		7F47FC10685955E8A4432D19 /* Pods_Wire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B545EF400FF219592F6CC9 /* Pods_Wire.framework */; };
 		B16BFB6FEDD09CAA749CDEBC /* Pods_WireUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7D5B9B7D24FDABFD32BB125 /* Pods_WireUITests.framework */; };
 /* End PBXBuildFile section */
@@ -84,6 +87,9 @@
 		4CF3BCCF21A0D37D00E6AD8D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4CF3BCD221A0E42200E6AD8D /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		4CF85C3B21C425ED003A6855 /* AddContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactView.swift; sourceTree = "<group>"; };
+		4CFD2C9521C699E7009D582E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		4CFD2C9721C69B7A009D582E /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		4CFD2C9A21C69D6C009D582E /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		7A3C68A2BD84A7C7E6306215 /* Pods-WireTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WireTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WireTests/Pods-WireTests.release.xcconfig"; sourceTree = "<group>"; };
 		85B545EF400FF219592F6CC9 /* Pods_Wire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93BA8114EE4C92F440A3A585 /* Pods_WireTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WireTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +131,8 @@
 		4C1775E121A2265F00D9856C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4CFD2C9721C69B7A009D582E /* Chat.swift */,
+				4CFD2C9521C699E7009D582E /* Message.swift */,
 				4C1775E221A2267C00D9856C /* User.swift */,
 			);
 			path = Models;
@@ -208,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF85C3B21C425ED003A6855 /* AddContactView.swift */,
+				4CFD2C9A21C69D6C009D582E /* ChatTableViewCell.swift */,
 				4CC71F1A219781A2003BBB4A /* SettingsTableViewCell.swift */,
 				4C35095321A72A5100B7500D /* TextFieldTableViewCell.swift */,
 				4C35095121A7148D00B7500D /* UsersTableViewCell.swift */,
@@ -499,6 +508,7 @@
 				4CC71F1921977C66003BBB4A /* TabBarController.swift in Sources */,
 				4CB177DA21A0696800E1D0E1 /* SplashViewController.swift in Sources */,
 				4CF3BCCE21A0B73500E6AD8D /* SignInViewController.swift in Sources */,
+				4CFD2C9B21C69D6C009D582E /* ChatTableViewCell.swift in Sources */,
 				4CBC8405219F23F4001DB328 /* Colors.swift in Sources */,
 				4CF3BCD021A0D37D00E6AD8D /* String.swift in Sources */,
 				4C35095621A72CF900B7500D /* NSLayoutConstraint.swift in Sources */,
@@ -510,7 +520,9 @@
 				4CF85C3C21C425ED003A6855 /* AddContactView.swift in Sources */,
 				4C35095221A7148D00B7500D /* UsersTableViewCell.swift in Sources */,
 				4C35095C21A786B500B7500D /* UIView.swift in Sources */,
+				4CFD2C9821C69B7A009D582E /* Chat.swift in Sources */,
 				4CC71F1B219781A2003BBB4A /* SettingsTableViewCell.swift in Sources */,
+				4CFD2C9621C699E7009D582E /* Message.swift in Sources */,
 				4CC71EEB21976F76003BBB4A /* ChatsViewController.swift in Sources */,
 				4CEB354321A081F100F349D5 /* ContactsViewController.swift in Sources */,
 			);

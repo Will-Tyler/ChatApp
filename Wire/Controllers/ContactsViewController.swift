@@ -72,47 +72,11 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 		navigationItem.setRightBarButton(addItem, animated: true)
 
 		setupInitialLayout()
-//		loadContacts()
 		observeContacts()
 	}
 
 	private let contactsRef = Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/contacts")
 	private var contacts = [User]()
-
-//	private func loadContacts() {
-//		contactsRef.observeSingleEvent(of: .value, with: { (snapshot) in
-//			let usersRef = Database.database().reference().child("users")
-//
-//			for child in snapshot.children {
-//				guard let childSnapshot = child as? DataSnapshot else {
-//					continue
-//				}
-//				let contactQuery = usersRef.queryOrderedByKey().queryEqual(toValue: childSnapshot.value)
-//
-//				contactQuery.observeSingleEvent(of: .value, with: { (snapshot) in
-//					guard let contactDict = snapshot.value as? [String: Any] else {
-//						// Couldn't find contact.
-//						// Let's see if we can delete it.
-//						self.contactsRef.child(childSnapshot.key).removeValue()
-//
-//						return
-//					}
-//
-//					assert(contactDict.count == 1)
-//
-//					for (key, value) in contactDict {
-//						let contact = User(id: key, properties: value as! [String: Any])
-//						let indexPath = IndexPath(row: self.contacts.count, section: 0)
-//
-//						self.contacts.append(contact)
-//						self.contactsTableView.insertRows(at: [indexPath], with: .automatic)
-//					}
-//				})
-//			}
-//		}, withCancel: { (error) in
-//			self.alertUser(title: "Error Loading Contacts", message: error.localizedDescription)
-//		})
-//	}
 
 	private func observeContacts() {
 		contactsRef.observe(.childAdded, with: { snapshot in
@@ -153,9 +117,10 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 	}
 
 	private func toggleEmailFieldHeight() {
-		let constant = emailFieldHeight.constant
+		let oldConstant = emailFieldHeight.constant
+		let newConstant = oldConstant == 0 ? emailField.intrinsicContentSize.height : 0
 
-		emailFieldHeight.constant = constant == 0 ? emailField.intrinsicContentSize.height : 0
+		emailFieldHeight.constant = newConstant
 	}
 
 	@objc

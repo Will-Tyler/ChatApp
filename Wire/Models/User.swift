@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct User {
+struct User: Hashable {
 
 	let uid: String
 	var displayName: String

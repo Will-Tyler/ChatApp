@@ -18,6 +18,7 @@ final class ChatsViewController: UIViewController, UITableViewDelegate, UITableV
 		table.delegate = self
 		table.dataSource = self
 		table.backgroundColor = Colors.background
+		table.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.cellID)
 
 		return table
 	}()
@@ -56,16 +57,24 @@ final class ChatsViewController: UIViewController, UITableViewDelegate, UITableV
 		setupInitialLayout()
 	}
 
+	private var chats = fakeData
+
 	// Table View
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 5
+		return chats.count
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = UITableViewCell()
+		let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.cellID, for: indexPath) as! ChatTableViewCell
 
-		cell.backgroundColor = Colors.header
+		cell.setChat(to: chats[indexPath.row])
 
 		return cell
+	}
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 96
+	}
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 
 }
