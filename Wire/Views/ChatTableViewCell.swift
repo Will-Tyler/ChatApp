@@ -11,7 +11,7 @@ import UIKit
 
 final class ChatTableViewCell: UITableViewCell {
 
-	private lazy var nameLabel: UILabel = {
+	private lazy var titleLabel: UILabel = {
 		let label = UILabel()
 
 		label.textColor = .white
@@ -28,19 +28,19 @@ final class ChatTableViewCell: UITableViewCell {
 	}()
 
 	private func setupInitialLayout() {
-		addSubview(nameLabel)
+		addSubview(titleLabel)
 		addSubview(previewLabel)
 
-		nameLabel.translatesAutoresizingMaskIntoConstraints = false
-		nameLabel.heightAnchor.constraint(equalToConstant: nameLabel.intrinsicContentSize.height).activate()
-		nameLabel.widthAnchor.constraint(equalTo: widthAnchor).activate()
-		nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).activate()
-		nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).activate()
+		titleLabel.translatesAutoresizingMaskIntoConstraints = false
+		titleLabel.heightAnchor.constraint(equalToConstant: titleLabel.intrinsicContentSize.height).activate()
+		titleLabel.widthAnchor.constraint(equalTo: widthAnchor).activate()
+		titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).activate()
+		titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).activate()
 
 		previewLabel.translatesAutoresizingMaskIntoConstraints = false
 		previewLabel.heightAnchor.constraint(equalToConstant: previewLabel.intrinsicContentSize.height).activate()
 		previewLabel.widthAnchor.constraint(equalTo: widthAnchor).activate()
-		previewLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).activate()
+		previewLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).activate()
 		previewLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).activate()
 	}
 
@@ -55,7 +55,7 @@ final class ChatTableViewCell: UITableViewCell {
 	override var intrinsicContentSize: CGSize {
 		get {
 			let superSize = super.intrinsicContentSize
-			let height = nameLabel.intrinsicContentSize.height + previewLabel.intrinsicContentSize.height
+			let height = titleLabel.intrinsicContentSize.height + previewLabel.intrinsicContentSize.height
 
 			return CGSize(width: superSize.width, height: height)
 		}
@@ -63,9 +63,8 @@ final class ChatTableViewCell: UITableViewCell {
 
 	private var chat: Chat! {
 		didSet {
-			if let name = chat.name {
-				nameLabel.text = name
-			}
+			titleLabel.text = chat.title
+
 			if let preview = chat.preview {
 				previewLabel.text = preview
 			}

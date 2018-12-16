@@ -13,12 +13,16 @@ struct Chat {
 
 	typealias Member = User
 
-	var name: String?
+	private var name: String?
 	var members: Set<Member>
 	var transcript: [Message]
 
 	init(name: String? = nil, members: Set<Member>, transcript: [Message] = []) {
 		assert(!members.isEmpty, "Cannot have a Chat without any members.")
+
+		if let name = name {
+			assert(!name.isEmpty, "Cannot have a Chat with an empty name.")
+		}
 
 		self.name = name
 		self.members = members
@@ -30,6 +34,29 @@ struct Chat {
 			return transcript.last?.content
 		}
 	}
+	var title: String {
+		get {
+			if name != nil {
+				return name!
+			}
+			else {
+				var names = [String]()
+
+				assert(!self.members.isEmpty)
+
+				var members = self.members
+
+				while members.count > 0, names.count < 3 {
+					let random = members.randomElement()!
+
+					names.append(random.displayName)
+					members.remove(random)
+				}
+
+				return names.joined(separator: ", ").appending("...")
+			}
+		}
+	}
 	
 }
 
@@ -37,13 +64,15 @@ struct Chat {
 var fakeData: [Chat] {
 	get {
 		let members: [User] = [
-			User(id: "0", properties: ["email": "none", "name": "Will"])
+			User(id: "0", properties: ["email": "none", "name": "Will"]),
+			User(id: "1", properties: ["email": "none", "name": "Larry"])
 		]
 		let messages: [Message] = [
 			Message(content: "Hello", timestamp: Date(), sender: members.first!)
 		]
 		let data = [
 			Chat(name: "Students", members: Set<User>(members), transcript: messages),
+			Chat(members: Set<User>(members))
 		]
 
 		return data
