@@ -59,22 +59,3 @@ struct Chat {
 	}
 	
 }
-
-
-var fakeData: [Chat] {
-	get {
-		let members: [User] = [
-			User(id: "0", properties: ["email": "none", "name": "Will"]),
-			User(id: "1", properties: ["email": "none", "name": "Larry"])
-		]
-		let messages: [Message] = [
-			Message(content: "Hello", timestamp: Date(), sender: members.first!)
-		]
-		let data = [
-			Chat(name: "Students", members: Set<User>(members), transcript: messages),
-			Chat(members: Set<User>(members))
-		]
-
-		return data
-	}
-}
