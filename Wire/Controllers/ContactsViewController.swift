@@ -16,7 +16,7 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 	private lazy var contactsTableView: UITableView = {
 		let table = UITableView()
 
-		table.allowsMultipleSelection = false
+		table.allowsMultipleSelection = self.mode == .select
 		table.delegate = self
 		table.dataSource = self
 		table.backgroundColor = Colors.background
@@ -24,8 +24,9 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 
 		return table
 	}()
-	private lazy var addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonPressed))
-	private lazy var doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
+	private lazy var addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemAction))
+	private lazy var doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneItemAction))
+	private lazy var selectItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(selectItemAction))
 	private lazy var emailField = AddContactView()
 	private var emailFieldHeight: NSLayoutConstraint!
 
@@ -69,14 +70,48 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 
 		view.backgroundColor = Colors.background
 
-		navigationItem.setRightBarButton(addItem, animated: true)
+		switch mode {
+		case .select:
+			navigationItem.setRightBarButton(selectItem, animated: true)
+
+		case .view:
+			navigationItem.setRightBarButton(addItem, animated: true)
+		}
 
 		setupInitialLayout()
 		observeContacts()
 	}
 
+	private var mode: Mode {
+		get {
+			let navigationController = self.navigationController!
+			let tbc = tabBarController as! TabBarController
+
+			if navigationController === tbc.contactsNavigation {
+				return .view
+			}
+			else {
+				return .select
+			}
+		}
+	}
+
 	private let contactsRef = Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/contacts")
 	private var contacts = [User]()
+
+	var selectedContacts: [User] {
+		get {
+			var selected = [User]()
+
+			if let selectedPaths = contactsTableView.indexPathsForSelectedRows {
+				for path in selectedPaths {
+					selected.append(contacts[path.row])
+				}
+			}
+
+			return selected
+		}
+	}
 
 	private func observeContacts() {
 		contactsRef.observe(.childAdded, with: { snapshot in
@@ -124,14 +159,14 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 	}
 
 	@objc
-	private func addButtonPressed() {
+	private func addItemAction() {
 		toggleEmailFieldHeight()
 		emailField.becomeFirstResponder()
 
 		navigationItem.setRightBarButton(doneItem, animated: true)
 	}
 	@objc
-	private func doneButtonPressed() {
+	private func doneItemAction() {
 		emailField.resignFirstResponder()
 		toggleEmailFieldHeight()
 
@@ -143,6 +178,10 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 		else {
 			alertUser(title: "Invalid Email", message: "You must enter a valid email address.")
 		}
+	}
+	@objc
+	private func selectItemAction() {
+		navigationController?.popViewController(animated: true)
 	}
 
 	private func addContact(with email: String) {
@@ -180,7 +219,9 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 		return cell
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		contactsTableView.deselectRow(at: indexPath, animated: true)
+		if mode == .view {
+			contactsTableView.deselectRow(at: indexPath, animated: true)
+		}
 	}
 	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		return true
@@ -208,5 +249,13 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 			})
 		}
 	}
+
+}
+
+
+fileprivate enum Mode {
+
+	case view
+	case select
 
 }

@@ -1,5 +1,5 @@
 //
-//  SettingsTableViewCell.swift
+//  DarkTableViewCell.swift
 //  Wire
 //
 //  Created by Will Tyler on 11/10/18.
@@ -9,9 +9,9 @@
 import UIKit
 
 
-class SettingsTableViewCell: UITableViewCell {
+class DarkTableViewCell: UITableViewCell {
 
-	static let cellID = "SettingsTableViewCell"
+	static let cellID = "DarkTableViewCell"
 
 	override func layoutSubviews() {
 		super.layoutSubviews()

@@ -23,8 +23,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	}()
 
 	private func setupInitialLayout() {
-		view.subviews.forEach({ $0.removeFromSuperview() })
-
 		let safeArea = view.safeAreaLayoutGuide
 
 		view.addSubview(tableView)
@@ -93,7 +91,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
 	func numberOfSections(in tableView: UITableView) -> Int {
 		if tableView === self.tableView {
-			return 2
+			return sectionNames.count
 		}
 		else {
 			fatalError()
@@ -107,10 +105,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		if indexPath.section == 0, indexPath.row == 0 {
-			return TextFieldTableViewCell()
+			return DisplayNameTableViewCell()
 		}
 		else {
-			let cell = SettingsTableViewCell()
+			let cell = DarkTableViewCell()
 
 			cell.textLabel!.text = cellTexts[indexPath.section]![indexPath.row]!
 			cell.textLabel!.textColor = .red
@@ -120,7 +118,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		cellActions[indexPath.section]![indexPath.row]!()
-
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 

@@ -52,12 +52,17 @@ final class ChatsViewController: UIViewController, UITableViewDelegate, UITableV
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemAction))
 
 		setupInitialLayout()
 	}
 
-	private var chats = fakeData
+	@objc
+	private func addItemAction() {
+		navigationController?.pushViewController(NewChatViewController(), animated: true)
+	}
+
+	private var chats = [Chat]()
 
 	// Table View
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
