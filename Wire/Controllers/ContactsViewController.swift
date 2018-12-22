@@ -16,7 +16,7 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 	private lazy var contactsTableView: UITableView = {
 		let table = UITableView()
 
-		table.allowsMultipleSelection = self.mode == .select
+		table.allowsMultipleSelection = false
 		table.delegate = self
 		table.dataSource = self
 		table.backgroundColor = Colors.background
@@ -26,7 +26,6 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 	}()
 	private lazy var addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemAction))
 	private lazy var doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneItemAction))
-	private lazy var selectItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(selectItemAction))
 	private lazy var emailField = AddContactView()
 	private var emailFieldHeight: NSLayoutConstraint!
 
@@ -72,7 +71,7 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 
 		switch mode {
 		case .select:
-			navigationItem.setRightBarButton(selectItem, animated: true)
+			contactsTableView.allowsMultipleSelection = true
 
 		case .view:
 			navigationItem.setRightBarButton(addItem, animated: true)
@@ -82,36 +81,11 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 		observeContacts()
 	}
 
-	private var mode: Mode {
-		get {
-			let navigationController = self.navigationController!
-			let tbc = tabBarController as! TabBarController
-
-			if navigationController === tbc.contactsNavigation {
-				return .view
-			}
-			else {
-				return .select
-			}
-		}
-	}
+	var mode: ContactsViewControllerMode = .view
+	var delegate: ContactsViewControllerDelegate!
 
 	private let contactsRef = Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/contacts")
 	private var contacts = [User]()
-
-	var selectedContacts: [User] {
-		get {
-			var selected = [User]()
-
-			if let selectedPaths = contactsTableView.indexPathsForSelectedRows {
-				for path in selectedPaths {
-					selected.append(contacts[path.row])
-				}
-			}
-
-			return selected
-		}
-	}
 
 	private func observeContacts() {
 		contactsRef.observe(.childAdded, with: { snapshot in
@@ -181,7 +155,19 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 	}
 	@objc
 	private func selectItemAction() {
-		navigationController?.popViewController(animated: true)
+		guard let navigationController = self.navigationController else {
+			print("Expected a navigation controller but found none...")
+			return
+		}
+
+		navigationController.popViewController(animated: true)
+
+		guard let newChatViewController = navigationController.topViewController as? NewChatViewController else {
+			print("Expected a NewChatViewController but could not cast...")
+			return
+		}
+
+		newChatViewController.tableView.reloadData()
 	}
 
 	private func addContact(with email: String) {
@@ -222,6 +208,14 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 		if mode == .view {
 			contactsTableView.deselectRow(at: indexPath, animated: true)
 		}
+		else { // mode == .select
+			delegate.didSelect(contact: contacts[indexPath.row])
+		}
+	}
+	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+		if mode == .select {
+			delegate.didDeselect(contact: contacts[indexPath.row])
+		}
 	}
 	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		return true
@@ -253,7 +247,15 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 }
 
 
-fileprivate enum Mode {
+protocol ContactsViewControllerDelegate {
+
+	func didSelect(contact: User)
+	func didDeselect(contact: User)
+
+}
+
+
+enum ContactsViewControllerMode {
 
 	case view
 	case select

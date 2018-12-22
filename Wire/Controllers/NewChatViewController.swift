@@ -9,7 +9,7 @@
 import UIKit
 
 
-final class NewChatViewController: UITableViewController {
+final class NewChatViewController: UITableViewController, ContactsViewControllerDelegate {
 
 	private lazy var createItem: UIBarButtonItem = {
 		let item = UIBarButtonItem(title: "Create", style: .done, target: self, action: #selector(createItemAction))
@@ -18,7 +18,14 @@ final class NewChatViewController: UITableViewController {
 
 		return item
 	}()
-	private lazy var contactsViewController = ContactsViewController()
+	private lazy var contactsViewController: ContactsViewController = {
+		let controller = ContactsViewController()
+
+		controller.mode = .select
+		controller.delegate = self
+
+		return controller
+	}()
 
 	override func loadView() {
 		super.loadView()
@@ -54,23 +61,33 @@ final class NewChatViewController: UITableViewController {
 	private func createItemAction() {
 	}
 
-	private var selectedContacts: [User] {
-		get {
-			return contactsViewController.selectedContacts
+	private var selectedContacts: [User] = [] {
+		didSet {
+			createItem.isEnabled = !selectedContacts.isEmpty
 		}
+	}
+
+	// ContactsViewControllerDelegate
+	func didSelect(contact: User) {
+		if !selectedContacts.contains(contact) {
+			let path = IndexPath(row: selectedContacts.count, section: 1)
+
+			selectedContacts.append(contact)
+			tableView.insertRows(at: [path], with: .automatic)
+		}
+	}
+	func didDeselect(contact: User) {
+		let indices = selectedContacts.indices(where: { $0 == contact })
+		let paths = indices.map({ return IndexPath(row: $0, section: 1) })
+
+		selectedContacts.remove(at: indices)
+		tableView.deleteRows(at: paths, with: .automatic)
 	}
 
 	// Table view
 	private let sectionNames = [
 		0: "Name",
 		1: "Members"
-	]
-	private lazy var cellActions = [
-		1: [
-			0: {
-				self.navigationController!.pushViewController(self.contactsViewController, animated: true)
-			}
-		]
 	]
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return sectionNames.count
@@ -82,6 +99,7 @@ final class NewChatViewController: UITableViewController {
 		switch section {
 		case 0:
 			return 1
+
 		case 1:
 			return selectedContacts.count + 1
 
@@ -94,9 +112,16 @@ final class NewChatViewController: UITableViewController {
 			return tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.cellID, for: indexPath) as! TextFieldTableViewCell
 
 		case 1:
+			let selectedContacts = self.selectedContacts
 			let cell = tableView.dequeueReusableCell(withIdentifier: DarkTableViewCell.cellID, for: indexPath) as! DarkTableViewCell
 
-			cell.textLabel?.text = "Add Members"
+			if indexPath.row < selectedContacts.count {
+				cell.textLabel?.text = selectedContacts[indexPath.row].displayName
+			}
+			else {
+				cell.textLabel?.text = "Edit Members"
+			}
+
 			cell.textLabel?.textColor = .white
 
 			return cell
@@ -105,7 +130,10 @@ final class NewChatViewController: UITableViewController {
 		}
 	}
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		cellActions[indexPath.section]![indexPath.row]!()
+		if indexPath.section == 1, indexPath.row == selectedContacts.count {
+			navigationController?.pushViewController(contactsViewController, animated: true)
+		}
+
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 
