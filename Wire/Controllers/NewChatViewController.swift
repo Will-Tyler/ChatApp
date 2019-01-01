@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 
 final class NewChatViewController: UITableViewController, ContactsViewControllerDelegate {
@@ -59,6 +61,18 @@ final class NewChatViewController: UITableViewController, ContactsViewController
 
 	@objc
 	private func createItemAction() {
+		let members = Set<User>(selectedContacts)
+		var chatName: String?
+		let chatTitlePath = IndexPath(row: 0, section: 0)
+
+		if let chatTitleCell = tableView.cellForRow(at: chatTitlePath), let chatTitle = chatTitleCell.textLabel?.text {
+			chatName = chatTitle
+		}
+
+		let chat = Chat(name: chatName, members: members)
+
+		Firebase.add(chat: chat)
+		navigationController?.popViewController(animated: true)
 	}
 
 	private var selectedContacts: [User] = [] {

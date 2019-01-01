@@ -11,7 +11,9 @@ import Foundation
 
 struct User: Hashable {
 
-	let uid: String
+	typealias UID = String
+
+	let uid: UID
 	var displayName: String
 	let email: String
 

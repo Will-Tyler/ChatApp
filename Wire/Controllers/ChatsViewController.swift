@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 final class ChatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -55,6 +56,7 @@ final class ChatsViewController: UIViewController, UITableViewDelegate, UITableV
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemAction))
 
 		setupInitialLayout()
+		observeChats()
 	}
 
 	@objc
@@ -63,6 +65,12 @@ final class ChatsViewController: UIViewController, UITableViewDelegate, UITableV
 	}
 
 	private var chats = [Chat]()
+
+	private func observeChats() {
+		Firebase.observeChats(eventType: .childAdded, with: { snapshot in
+			print(snapshot.key)
+		})
+	}
 
 	// Table View
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

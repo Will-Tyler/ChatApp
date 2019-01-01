@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct Chat {
+class Chat {
 
 	typealias Member = User
 
@@ -27,6 +27,19 @@ struct Chat {
 		self.name = name
 		self.members = members
 		self.transcript = transcript
+	}
+	init(from dictionary: [String: Any]) {
+		let memberUIDs = dictionary["members"] as! [String]
+
+		self.members = []
+		self.transcript = []
+		self.name = dictionary["name"] as? String
+
+		memberUIDs.forEach({ uid in
+			Firebase.handleUser(uid: uid, with: { user in
+				self.members.insert(user)
+			})
+		})
 	}
 
 	var preview: String? {
