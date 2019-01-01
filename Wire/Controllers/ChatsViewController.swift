@@ -67,8 +67,12 @@ final class ChatsViewController: UIViewController, UITableViewDelegate, UITableV
 	private var chats = [Chat]()
 
 	private func observeChats() {
-		Firebase.observeChats(eventType: .childAdded, with: { snapshot in
-			print(snapshot.key)
+		Firebase.observeChats(at: Auth.auth().currentUser!.uid, with: { chat in
+			let count = self.chats.count
+			let path = IndexPath(row: count, section: 0)
+
+			self.chats.append(chat)
+			self.tableView.insertRows(at: [path], with: .automatic)
 		})
 	}
 

@@ -13,10 +13,16 @@ import FirebaseDatabase
 
 final class Firebase {
 
+	static var currentID: String? {
+		get {
+			return Auth.auth().currentUser?.uid
+		}
+	}
+
 	static func create(chat: Chat) {
 		let chatsRef = Database.database().reference(withPath: "chats")
 		let chatRef = chatsRef.childByAutoId()
-		var uids = chat.members.map({ return $0.uid })
+		var uids = chat.memberIDs
 
 		uids.append(Auth.auth().currentUser!.uid)
 		
@@ -33,6 +39,13 @@ final class Firebase {
 		uids.forEach({ uid in
 			add(chatID: chatRef.key, to: uid)
 		})
+	}
+
+	private static func add(chatID: String, to uid: User.UID) {
+		let userChatsRef = Database.database().reference(withPath: "users/\(uid)/chats")
+		let userChatRef = userChatsRef.childByAutoId()
+
+		userChatRef.setValue(chatID)
 	}
 
 	static func observeChats(eventType: DataEventType, with handler: @escaping (DataSnapshot)->()) {
@@ -54,11 +67,25 @@ final class Firebase {
 		})
 	}
 
-	static func add(chatID: String, to uid: User.UID) {
-		let userChatsRef = Database.database().reference(withPath: "users/\(uid)/chats")
-		let userChatRef = userChatsRef.childByAutoId()
+	private static func handleChat(at id: String, with handler: @escaping (Chat)->()) {
+		let chatRef = Database.database().reference(withPath: "chats/\(id)")
 
-		userChatRef.setValue(chatID)
+		chatRef.observeSingleEvent(of: .value, with: { snapshot in
+			let values = snapshot.value as! [String: Any]
+			let chat = Chat(from: values)
+
+			handler(chat)
+		})
+	}
+
+	static func observeChats(at uid: User.UID, with handler: @escaping (Chat)->()) {
+		let userChatsRef = Database.database().reference(withPath: "users/\(uid)/chats")
+
+		userChatsRef.observe(.childAdded, with: { snapshot in
+			let chatID = snapshot.value as! String
+
+			handleChat(at: chatID, with: handler)
+		})
 	}
 
 }

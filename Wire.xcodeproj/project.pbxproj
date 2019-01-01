@@ -14,6 +14,7 @@
 		4C35095621A72CF900B7500D /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35095521A72CF900B7500D /* NSLayoutConstraint.swift */; };
 		4C35095C21A786B500B7500D /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35095B21A786B500B7500D /* UIView.swift */; };
 		4C35095E21A798E900B7500D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35095D21A798E900B7500D /* Array.swift */; };
+		4C49290721DC0D0B00696842 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49290621DC0D0B00696842 /* ChatViewController.swift */; };
 		4C502DD621CD77AB0000E210 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C502DD521CD77AB0000E210 /* TextFieldTableViewCell.swift */; };
 		4C5BE93E21DA987600AD0AFC /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5BE93D21DA987600AD0AFC /* Firebase.swift */; };
 		4CB177DA21A0696800E1D0E1 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB177D921A0696800E1D0E1 /* SplashViewController.swift */; };
@@ -67,6 +68,7 @@
 		4C35095521A72CF900B7500D /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
 		4C35095B21A786B500B7500D /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		4C35095D21A798E900B7500D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		4C49290621DC0D0B00696842 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		4C502DD521CD77AB0000E210 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		4C5BE93D21DA987600AD0AFC /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		4CB177D921A0696800E1D0E1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		4CCBD04F21989D77004521B1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4C49290621DC0D0B00696842 /* ChatViewController.swift */,
 				4CC71EEA21976F76003BBB4A /* ChatsViewController.swift */,
 				4CEB354221A081F100F349D5 /* ContactsViewController.swift */,
 				4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */,
@@ -534,6 +537,7 @@
 				4C35095C21A786B500B7500D /* UIView.swift in Sources */,
 				4CFD2C9821C69B7A009D582E /* Chat.swift in Sources */,
 				4CC71F1B219781A2003BBB4A /* DarkTableViewCell.swift in Sources */,
+				4C49290721DC0D0B00696842 /* ChatViewController.swift in Sources */,
 				4CFD2C9621C699E7009D582E /* Message.swift in Sources */,
 				4CC71EEB21976F76003BBB4A /* ChatsViewController.swift in Sources */,
 				4CEB354321A081F100F349D5 /* ContactsViewController.swift in Sources */,

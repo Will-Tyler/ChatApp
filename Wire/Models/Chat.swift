@@ -9,15 +9,16 @@
 import Foundation
 
 
-class Chat {
+struct Chat {
 
 	typealias Member = User
 
 	var name: String?
-	var members: Set<Member>
+	var memberIDs: [Member.UID]
 	var transcript: [Message]
+	private var title: String?
 
-	init(name: String? = nil, members: Set<Member>, transcript: [Message] = []) {
+	init(name: String? = nil, members: [String], transcript: [Message] = []) {
 		assert(!members.isEmpty, "Cannot have a Chat without any members.")
 
 		if let name = name {
@@ -25,21 +26,13 @@ class Chat {
 		}
 
 		self.name = name
-		self.members = members
+		self.memberIDs = members
 		self.transcript = transcript
 	}
 	init(from dictionary: [String: Any]) {
-		let memberUIDs = dictionary["members"] as! [String]
-
-		self.members = []
-		self.transcript = []
+		self.memberIDs = dictionary["members"] as! [String]
 		self.name = dictionary["name"] as? String
-
-		memberUIDs.forEach({ uid in
-			Firebase.handleUser(uid: uid, with: { user in
-				self.members.insert(user)
-			})
-		})
+		self.transcript = dictionary["transcript"] as? [Message] ?? []
 	}
 
 	var preview: String? {
@@ -47,27 +40,43 @@ class Chat {
 			return transcript.last?.content
 		}
 	}
-	var title: String {
-		get {
-			if name != nil {
-				return name!
+	func handleTitle(with handler: @escaping (String)->()) {
+		if name != nil {
+			handler(name!)
+		}
+		else if title != nil {
+			handler(title!)
+		}
+		else {
+			var memberIDs = Set<User.UID>(self.memberIDs)
+			var randomIDs = [String]()
+
+			while memberIDs.count > 0, randomIDs.count < 3 {
+				let randomID = memberIDs.randomElement()!
+
+				memberIDs.remove(randomID)
+				randomIDs.append(randomID)
 			}
-			else {
-				var names = [String]()
 
-				assert(!self.members.isEmpty)
+			var names = [String]()
+			let group = DispatchGroup()
 
-				var members = self.members
-
-				while members.count > 0, names.count < 3 {
-					let random = members.randomElement()!
-
-					names.append(random.displayName)
-					members.remove(random)
-				}
-
-				return names.joined(separator: ", ").appending("...")
+			for randomID in randomIDs {
+				group.enter()
+				Firebase.handleUser(uid: randomID, with: { user in
+					names.append(user.displayName)
+					group.leave()
+				})
 			}
+
+			group.notify(queue: .main, execute: {
+				assert(!names.isEmpty)
+				
+				let title = names.joined(separator: ", ").appending("...")
+
+				self.title = title
+				handler(title)
+			})
 		}
 	}
 	

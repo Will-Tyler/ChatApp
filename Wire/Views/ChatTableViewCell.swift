@@ -32,16 +32,16 @@ final class ChatTableViewCell: UITableViewCell {
 		addSubview(previewLabel)
 
 		titleLabel.translatesAutoresizingMaskIntoConstraints = false
-		titleLabel.heightAnchor.constraint(equalToConstant: titleLabel.intrinsicContentSize.height).activate()
+		titleLabel.heightAnchor.constraint(equalToConstant: 28).activate()
 		titleLabel.widthAnchor.constraint(equalTo: widthAnchor).activate()
 		titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).activate()
 		titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).activate()
 
 		previewLabel.translatesAutoresizingMaskIntoConstraints = false
-		previewLabel.heightAnchor.constraint(equalToConstant: previewLabel.intrinsicContentSize.height).activate()
-		previewLabel.widthAnchor.constraint(equalTo: widthAnchor).activate()
-		previewLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).activate()
 		previewLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).activate()
+		previewLabel.trailingAnchor.constraint(equalTo: trailingAnchor).activate()
+		previewLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).activate()
+		previewLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).activate()
 	}
 
 	override func layoutSubviews() {
@@ -52,18 +52,11 @@ final class ChatTableViewCell: UITableViewCell {
 		setupInitialLayout()
 	}
 
-	override var intrinsicContentSize: CGSize {
-		get {
-			let superSize = super.intrinsicContentSize
-			let height = titleLabel.intrinsicContentSize.height + previewLabel.intrinsicContentSize.height
-
-			return CGSize(width: superSize.width, height: height)
-		}
-	}
-
 	private var chat: Chat! {
 		didSet {
-			titleLabel.text = chat.title
+			chat.handleTitle(with: { title in
+				self.titleLabel.text = title
+			})
 
 			if let preview = chat.preview {
 				previewLabel.text = preview
