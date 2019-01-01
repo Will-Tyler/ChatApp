@@ -16,10 +16,13 @@ final class Firebase {
 	static func add(chat: Chat) {
 		let chatsRef = Database.database().reference(withPath: "chats")
 		let chatRef = chatsRef.childByAutoId()
-		let dict: [String: Any] = [
-			"title": chat.title,
+		var dict: [String: Any] = [
 			"members": chat.members.map({ return $0.uid })
 		]
+
+		if let name = chat.name {
+			dict["name"] = name
+		}
 
 		chatRef.updateChildValues(dict)
 	}

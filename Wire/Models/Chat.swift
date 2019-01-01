@@ -13,7 +13,7 @@ class Chat {
 
 	typealias Member = User
 
-	private var name: String?
+	var name: String?
 	var members: Set<Member>
 	var transcript: [Message]
 

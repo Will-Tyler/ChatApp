@@ -62,13 +62,14 @@ final class NewChatViewController: UITableViewController, ContactsViewController
 	@objc
 	private func createItemAction() {
 		let members = Set<User>(selectedContacts)
-		var chatName: String?
-		let chatTitlePath = IndexPath(row: 0, section: 0)
+		let chatNamePath = IndexPath(row: 0, section: 0)
+		let chatNameCell = tableView.cellForRow(at: chatNamePath) as! TextFieldTableViewCell
+		var chatName = chatNameCell.textField.text
 
-		if let chatTitleCell = tableView.cellForRow(at: chatTitlePath), let chatTitle = chatTitleCell.textLabel?.text {
-			chatName = chatTitle
+		if let name = chatName, name.isEmpty {
+			chatName = nil
 		}
-
+		
 		let chat = Chat(name: chatName, members: members)
 
 		Firebase.add(chat: chat)
