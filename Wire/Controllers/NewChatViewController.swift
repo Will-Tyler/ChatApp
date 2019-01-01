@@ -72,7 +72,7 @@ final class NewChatViewController: UITableViewController, ContactsViewController
 		
 		let chat = Chat(name: chatName, members: members)
 
-		Firebase.add(chat: chat)
+		Firebase.create(chat: chat)
 		navigationController?.popViewController(animated: true)
 	}
 
