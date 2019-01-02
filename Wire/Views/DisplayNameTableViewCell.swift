@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseDatabase
 
 
 final class DisplayNameTableViewCell: TextFieldTableViewCell {
@@ -16,14 +14,10 @@ final class DisplayNameTableViewCell: TextFieldTableViewCell {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 
-		if let currentUser = Auth.auth().currentUser {
-			let displayNameRef = Database.database().reference().child("users/\(currentUser.uid)/name")
-
-			displayNameRef.observeSingleEvent(of: .value, with: { (snapshot) in
-				let name = snapshot.value as! String
-
-				self.textField.text = name
-				self.previousValue = name
+		if let currentID = Firebase.currentID {
+			Firebase.handleUser(uid: currentID, with: { user in
+				self.textField.text = user.displayName
+				self.previousValue = user.displayName
 				self.textField.addTarget(self, action: #selector(self.fieldEditingEnded), for: .editingDidEnd)
 			})
 		}
@@ -35,23 +29,12 @@ final class DisplayNameTableViewCell: TextFieldTableViewCell {
 	@objc
 	private func fieldEditingEnded() {
 		if let text = textField.text, text.isValidDisplayName {
-			if let currentUser = Auth.auth().currentUser {
-				let nameRef = Database.database().reference().child("users/\(currentUser.uid)/name")
-
-				nameRef.setValue(text, withCompletionBlock: { (error, dataRef) in
-					let controller = self.controller
-
-					guard error == nil else {
-						controller?.alertUser(title: "Display Name Error", message: error!.localizedDescription)
-
-						return
-					}
-
-					controller?.alertUser(title: "Display Name", message: "Successfully changed display name.")
-
-					self.previousValue = text
-				})
-			}
+			Firebase.updateDisplayName(to: text, completion: {
+				self.controller?.alertUser(title: "Display Name", message: "Successfully changed display name.")
+				self.previousValue = text
+			}, error: { error in
+				self.controller?.alertUser(title: "Display Name Error", message: error.localizedDescription)
+			})
 		}
 		else {
 			textField.text = previousValue

@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseDatabase
 
 
 final class ContactsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -84,44 +82,22 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 	var mode: ContactsViewControllerMode = .view
 	var delegate: ContactsViewControllerDelegate!
 
-	private let contactsRef = Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/contacts")
 	private var contacts = [User]()
 
 	private func observeContacts() {
-		contactsRef.observe(.childAdded, with: { snapshot in
-			guard let contactID = snapshot.value as? String else {
-				return
-			}
+		Firebase.observeContacts(with: { contact in
+			let path = IndexPath(row: self.contacts.count, section: 0)
 
-			let usersRef = Database.database().reference().child("users")
-			let contactQuery = usersRef.queryOrderedByKey().queryEqual(toValue: contactID)
-
-			contactQuery.observeSingleEvent(of: .value, with: { snapshot in
-				guard let contactDict = snapshot.value as? [String: Any] else {
-					return
-				}
-
-				assert(contactDict.count == 1)
-
-				for (key, value) in contactDict {
-					let contact = User(id: key, properties: value as! [String: Any])
-					let indexPath = IndexPath(row: self.contacts.count, section: 0)
-
-					self.contacts.append(contact)
-					self.contactsTableView.insertRows(at: [indexPath], with: .automatic)
-				}
-			})
+			self.contacts.append(contact)
+			self.contactsTableView.insertRows(at: [path], with: .automatic)
 		})
 
-		contactsRef.observe(.childRemoved, with: { snapshot in
-			guard let removedUID = snapshot.value as? String else {
-				return
-			}
-			let indices = self.contacts.indices(where: { $0.uid == removedUID })
-			let indexPaths = indices.map({ return IndexPath(row: $0, section: 0) })
+		Firebase.handleContactRemoved(with: { contact in
+			let indices = self.contacts.indices(where: { contact == $0 })
+			let paths = indices.map({ return IndexPath(row: $0, section: 0) })
 
 			self.contacts.remove(at: indices)
-			self.contactsTableView.deleteRows(at: indexPaths, with: .automatic)
+			self.contactsTableView.deleteRows(at: paths, with: .automatic)
 		})
 	}
 
@@ -147,7 +123,9 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 		navigationItem.setRightBarButton(addItem, animated: true)
 
 		if let email = emailField.email {
-			addContact(with: email)
+			Firebase.addContact(email: email, failHandler: {
+				self.alertUser(title: "No User Found", message: "A user with the email '\(email)' could not be found.")
+			})
 		}
 		else {
 			alertUser(title: "Invalid Email", message: "You must enter a valid email address.")
@@ -168,28 +146,6 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 		}
 
 		newChatViewController.tableView.reloadData()
-	}
-
-	private func addContact(with email: String) {
-		assert(email.isValidEmail)
-
-		let matchingUsersRef = Database.database().reference().child("users").queryOrdered(byChild: "email").queryEqual(toValue: email)
-
-		matchingUsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
-			guard let users = snapshot.value as? [String: Any] else {
-				self.alertUser(title: "No User Found", message: "A user with the email '\(email)' could not be found.")
-
-				return
-			}
-
-			assert(users.count == 1)
-
-			for (key, value) in users {
-				let user = User(id: key, properties: value as! [String: Any])
-
-				self.contactsRef.childByAutoId().setValue(user.uid)
-			}
-		})
 	}
 
 	// Table View
@@ -225,22 +181,7 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 			let removed = contacts.remove(at: indexPath.row)
 
 			contactsTableView.deleteRows(at: [indexPath], with: .automatic)
-
-			let contactQuery = contactsRef.queryOrderedByValue().queryEqual(toValue: removed.uid)
-
-			contactQuery.observeSingleEvent(of: .value, with: { snapshot in
-				guard let contactDict = snapshot.value as? [String: String] else {
-					return
-				}
-
-				assert(contactDict.count == 1)
-
-				for (key, _) in contactDict {
-					let contactRef = self.contactsRef.child(key)
-
-					contactRef.removeValue()
-				}
-			})
+			Firebase.removeContact(contact: removed)
 		}
 	}
 

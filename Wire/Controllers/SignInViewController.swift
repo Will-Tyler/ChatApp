@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseDatabase
 
 
 class SignInViewController: UIViewController {
@@ -262,7 +260,7 @@ class SignInViewController: UIViewController {
 
 		switch mode {
 		case .login:
-			Auth.auth().signIn(withEmail: email, password: password, completion: { (dataResult, error) in
+			Firebase.signIn(email: email, password: password, completion: { error in
 				guard error == nil else {
 					self.alertUser(title: "Error Signing In", message: error!.localizedDescription)
 					return
@@ -277,28 +275,17 @@ class SignInViewController: UIViewController {
 				return
 			}
 
-			Auth.auth().createUser(withEmail: email, password: password, completion: { (authDataResult, error) in
-				guard error == nil else {
-					self.alertUser(title: "Error Signing In", message: error!.localizedDescription)
-					return
-				}
-
-				let authData = authDataResult!
-				let user = authData.user
-				let dataRef = Database.database().reference()
-				let usersRef = dataRef.child("users")
-				let userRef = usersRef.child(user.uid)
-
-				userRef.updateChildValues(["name": displayName, "email": email])
-
+			Firebase.createUser(email: email, password: password, displayName: displayName, completion: {
 				tabBarController.dismiss(animated: true)
+			}, error: { error in
+				self.alertUser(title: "Error Signing In", message: error.localizedDescription)
 			})
 		}
 	}
 
 	var isSignedIn: Bool {
 		get {
-			return Auth.auth().currentUser != nil
+			return Firebase.currentID != nil
 		}
 	}
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 
 final class ChatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -67,7 +66,7 @@ final class ChatsViewController: UIViewController, UITableViewDelegate, UITableV
 	private var chats = [Chat]()
 
 	private func observeChats() {
-		Firebase.observeChats(at: Auth.auth().currentUser!.uid, with: { chat in
+		Firebase.observeChats(at: Firebase.currentID!, with: { chat in
 			let count = self.chats.count
 			let path = IndexPath(row: count, section: 0)
 

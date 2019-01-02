@@ -8,7 +8,6 @@
 
 import Foundation
 import Firebase
-import FirebaseDatabase
 
 
 final class Firebase {
@@ -86,6 +85,106 @@ final class Firebase {
 
 			handleChat(at: chatID, with: handler)
 		})
+	}
+
+	static func observeContacts(with handler: @escaping (User)->()) {
+		let contactsRef = Database.database().reference(withPath: "users/\(currentID!)/contacts")
+
+		contactsRef.observe(.childAdded, with: { snapshot in
+			if let contactID = snapshot.value as? String {
+				handleUser(uid: contactID, with: handler)
+			}
+		})
+	}
+
+	static func handleContactRemoved(with handler: @escaping (User)->()) {
+		let contactsRef = Database.database().reference(withPath: "users/\(currentID!)/contacts")
+
+		contactsRef.observe(.childRemoved, with: { snapshot in
+			if let contactID = snapshot.value as? String {
+				handleUser(uid: contactID, with: handler)
+			}
+		})
+	}
+
+	static func addContact(email: String, failHandler: @escaping ()->()) {
+		assert(email.isValidEmail)
+
+		let contactsRef = Database.database().reference(withPath: "users/\(currentID!)/contacts")
+		let matchingUsersRef = Database.database().reference(withPath: "users").queryOrdered(byChild: "email").queryEqual(toValue: email)
+
+		matchingUsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
+			guard let users = snapshot.value as? [String: Any] else {
+				failHandler()
+				return
+			}
+
+			assert(users.count == 1)
+
+			for (key, value) in users {
+				let user = User(id: key, properties: value as! [String: Any])
+
+				contactsRef.childByAutoId().setValue(user.uid)
+			}
+		})
+	}
+
+	static func removeContact(contact: User) {
+		let contactsRef = Database.database().reference(withPath: "users/\(currentID!)/contacts")
+		let contactQuery = contactsRef.queryOrderedByValue().queryEqual(toValue: contact.uid)
+
+		contactQuery.observeSingleEvent(of: .value, with: { snapshot in
+			guard let contactDict = snapshot.value as? [String: String] else {
+				return
+			}
+
+			assert(contactDict.count == 1)
+
+			for (key, _) in contactDict {
+				let contactRef = contactsRef.child(key)
+
+				contactRef.removeValue()
+			}
+		})
+	}
+
+	static func signIn(email: String, password: String, completion handler: @escaping (Error?)->()) {
+		Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
+			handler(error)
+		}
+	}
+
+	static func createUser(email: String, password: String, displayName: String, completion: @escaping ()->(), error errorHandler: @escaping (Error)->()) {
+		Auth.auth().createUser(withEmail: email, password: password, completion: { (authDataResult, error) in
+			guard error == nil else {
+				errorHandler(error!)
+				return
+			}
+
+			let authData = authDataResult!
+			let user = authData.user
+			let dataRef = Database.database().reference()
+			let usersRef = dataRef.child("users")
+			let userRef = usersRef.child(user.uid)
+
+			userRef.updateChildValues(["name": displayName, "email": email])
+			completion()
+		})
+	}
+
+	static func updateDisplayName(to name: String, completion: @escaping ()->(), error errorHandler: @escaping (Error)->()) {
+		if let currentID = currentID {
+			let nameRef = Database.database().reference().child("users/\(currentID)/name")
+
+			nameRef.setValue(name, withCompletionBlock: { (error, dataRef) in
+				guard error == nil else {
+					errorHandler(error!)
+					return
+				}
+
+				completion()
+			})
+		}
 	}
 
 }

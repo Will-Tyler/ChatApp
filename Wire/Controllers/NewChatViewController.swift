@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseDatabase
 
 
 final class NewChatViewController: UITableViewController, ContactsViewControllerDelegate {
