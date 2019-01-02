@@ -67,10 +67,8 @@ final class NewChatViewController: UITableViewController, ContactsViewController
 		if let name = chatName, name.isEmpty {
 			chatName = nil
 		}
-		
-		let chat = Chat(name: chatName, members: members.map({ return $0.uid }))
 
-		Firebase.create(chat: chat)
+		Firebase.createChat(name: chatName, memberIDs: members.map({ $0.uid }))
 		navigationController?.popViewController(animated: true)
 	}
 

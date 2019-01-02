@@ -18,18 +18,19 @@ final class Firebase {
 		}
 	}
 
-	static func create(chat: Chat) {
+	@discardableResult
+	static func createChat(name: String?, memberIDs: [String]) -> Chat {
 		let chatsRef = Database.database().reference(withPath: "chats")
 		let chatRef = chatsRef.childByAutoId()
-		var uids = chat.memberIDs
+		var uids = memberIDs
 
-		uids.append(Auth.auth().currentUser!.uid)
+		uids.append(currentID!)
 		
 		var dict: [String: Any] = [
 			"members": uids
 		]
 
-		if let name = chat.name {
+		if let name = name {
 			dict["name"] = name
 		}
 
@@ -38,6 +39,11 @@ final class Firebase {
 		uids.forEach({ uid in
 			add(chatID: chatRef.key, to: uid)
 		})
+
+		let chatID = chatRef.key
+		let chat = Chat(id: chatID, name: name, members: memberIDs)
+
+		return chat
 	}
 
 	private static func add(chatID: String, to uid: User.UID) {
@@ -70,8 +76,10 @@ final class Firebase {
 		let chatRef = Database.database().reference(withPath: "chats/\(id)")
 
 		chatRef.observeSingleEvent(of: .value, with: { snapshot in
+			assert(id == snapshot.key)
+			
 			let values = snapshot.value as! [String: Any]
-			let chat = Chat(from: values)
+			let chat = Chat(id: id, from: values)
 
 			handler(chat)
 		})
@@ -185,6 +193,32 @@ final class Firebase {
 				completion()
 			})
 		}
+	}
+
+	static func leave(chat: Chat) {
+		let membersRef = Database.database().reference(withPath: "chats/\(chat.id)/members")
+		let chatsRef = Database.database().reference(withPath: "users/\(currentID!)/chats")
+
+		membersRef.observeSingleEvent(of: .value, with: { snapshot in
+			let memberIDs = snapshot.value as! [String]
+			let indices = memberIDs.indices(where: { $0 == currentID! })
+
+			for index in indices {
+				let memberRef = membersRef.child("\(index)")
+
+				memberRef.removeValue()
+			}
+		})
+		chatsRef.observeSingleEvent(of: .value, with: { snapshot in
+			let chatPointers = snapshot.value as! [String: String]
+			let keys = chatPointers.keys(where: { $1 == chat.id })
+
+			for key in keys {
+				let chatPointer = chatsRef.child(key)
+
+				chatPointer.removeValue()
+			}
+		})
 	}
 
 }

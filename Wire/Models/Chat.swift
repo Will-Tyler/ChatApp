@@ -13,24 +13,28 @@ struct Chat {
 
 	typealias Member = User
 
+	let id: String
 	var name: String?
 	var memberIDs: [Member.UID]
 	var transcript: [Message]
 	private let title: NSMutableString
 
-	init(name: String? = nil, members: [String], transcript: [Message] = []) {
+	init(id: String, name: String? = nil, members: [String], transcript: [Message] = []) {
+		assert(!id.isEmpty)
 		assert(!members.isEmpty, "Cannot have a Chat without any members.")
 
 		if let name = name {
 			assert(!name.isEmpty, "Cannot have a Chat with an empty name.")
 		}
 
+		self.id = id
 		self.name = name
 		self.memberIDs = members
 		self.transcript = transcript
 		self.title = ""
 	}
-	init(from dictionary: [String: Any]) {
+	init(id: String, from dictionary: [String: Any]) {
+		self.id = id
 		self.memberIDs = dictionary["members"] as! [String]
 		self.name = dictionary["name"] as? String
 		self.transcript = dictionary["transcript"] as? [Message] ?? []

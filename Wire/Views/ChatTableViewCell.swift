@@ -19,29 +19,29 @@ final class ChatTableViewCell: UITableViewCell {
 
 		return label
 	}()
-	private lazy var previewLabel: UILabel = {
-		let label = UILabel()
-
-		label.textColor = .white
-
-		return label
-	}()
+//	private lazy var previewLabel: UILabel = {
+//		let label = UILabel()
+//
+//		label.textColor = .white
+//
+//		return label
+//	}()
 
 	private func setupInitialLayout() {
 		addSubview(titleLabel)
-		addSubview(previewLabel)
+//		addSubview(previewLabel)
 
 		titleLabel.translatesAutoresizingMaskIntoConstraints = false
-		titleLabel.heightAnchor.constraint(equalToConstant: 28).activate()
-		titleLabel.widthAnchor.constraint(equalTo: widthAnchor).activate()
 		titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).activate()
 		titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).activate()
+		titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor).activate()
+		titleLabel.heightAnchor.constraint(equalToConstant: 28).activate()
 
-		previewLabel.translatesAutoresizingMaskIntoConstraints = false
-		previewLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).activate()
-		previewLabel.trailingAnchor.constraint(equalTo: trailingAnchor).activate()
-		previewLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).activate()
-		previewLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).activate()
+//		previewLabel.translatesAutoresizingMaskIntoConstraints = false
+//		previewLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).activate()
+//		previewLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).activate()
+//		previewLabel.trailingAnchor.constraint(equalTo: trailingAnchor).activate()
+//		previewLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).activate()
 	}
 
 	override func layoutSubviews() {
@@ -58,9 +58,9 @@ final class ChatTableViewCell: UITableViewCell {
 				self.titleLabel.text = title
 			})
 
-			if let preview = chat.preview {
-				previewLabel.text = preview
-			}
+//			if let preview = chat.preview {
+//				previewLabel.text = preview
+//			}
 		}
 	}
 	func setChat(to chat: Chat) {

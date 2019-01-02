@@ -92,5 +92,18 @@ final class ChatsViewController: UIViewController, UITableViewDelegate, UITableV
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+		let leaveAction = UITableViewRowAction(style: .destructive, title: "Leave", handler: { action, path in
+			let chat = self.chats.remove(at: path.row)
+
+			self.tableView.deleteRows(at: [path], with: .automatic)
+			Firebase.leave(chat: chat)
+		})
+
+		return [leaveAction]
+	}
 
 }
