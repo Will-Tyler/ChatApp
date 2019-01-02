@@ -97,5 +97,10 @@ struct Chat {
 			})
 		}
 	}
+
+	mutating func send(message: Message) {
+		transcript.append(message)
+		Firebase.send(message: message, to: self)
+	}
 	
 }

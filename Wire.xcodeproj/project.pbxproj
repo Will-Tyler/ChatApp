@@ -19,6 +19,7 @@
 		4C5BE93E21DA987600AD0AFC /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5BE93D21DA987600AD0AFC /* Firebase.swift */; };
 		4C99A80721DD14F200C90D3A /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99A80621DD14F200C90D3A /* Dictionary.swift */; };
 		4C99A80921DD221800C90D3A /* MessageComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99A80821DD221800C90D3A /* MessageComposerView.swift */; };
+		4C99A80B21DD572600C90D3A /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99A80A21DD572600C90D3A /* MessageCollectionViewCell.swift */; };
 		4CB177DA21A0696800E1D0E1 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB177D921A0696800E1D0E1 /* SplashViewController.swift */; };
 		4CBC8405219F23F4001DB328 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8404219F23F4001DB328 /* Colors.swift */; };
 		4CBC8407219F2900001DB328 /* DarkNavigationContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */; };
@@ -75,6 +76,7 @@
 		4C5BE93D21DA987600AD0AFC /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		4C99A80621DD14F200C90D3A /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		4C99A80821DD221800C90D3A /* MessageComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposerView.swift; sourceTree = "<group>"; };
+		4C99A80A21DD572600C90D3A /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		4CB177D921A0696800E1D0E1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		4CBC8404219F23F4001DB328 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkNavigationContoller.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				4CFD2C9A21C69D6C009D582E /* ChatTableViewCell.swift */,
 				4CC71F1A219781A2003BBB4A /* DarkTableViewCell.swift */,
 				4C35095321A72A5100B7500D /* DisplayNameTableViewCell.swift */,
+				4C99A80A21DD572600C90D3A /* MessageCollectionViewCell.swift */,
 				4C99A80821DD221800C90D3A /* MessageComposerView.swift */,
 				4C502DD521CD77AB0000E210 /* TextFieldTableViewCell.swift */,
 				4C35095121A7148D00B7500D /* UsersTableViewCell.swift */,
@@ -529,6 +532,7 @@
 				4C99A80721DD14F200C90D3A /* Dictionary.swift in Sources */,
 				4C5BE93E21DA987600AD0AFC /* Firebase.swift in Sources */,
 				4CF3BCCE21A0B73500E6AD8D /* SignInViewController.swift in Sources */,
+				4C99A80B21DD572600C90D3A /* MessageCollectionViewCell.swift in Sources */,
 				4CFD2C9B21C69D6C009D582E /* ChatTableViewCell.swift in Sources */,
 				4CBC8405219F23F4001DB328 /* Colors.swift in Sources */,
 				4CC47AE121C82FC600186657 /* NewChatViewController.swift in Sources */,

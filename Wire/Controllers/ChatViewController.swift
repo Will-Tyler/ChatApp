@@ -9,9 +9,9 @@
 import UIKit
 
 
-final class ChatViewController: UIViewController {
+final class ChatViewController: UIViewController, MessageComposerViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
-	private let chat: Chat
+	private var chat: Chat
 
 	init(chat: Chat) {
 		self.chat = chat
@@ -21,20 +21,38 @@ final class ChatViewController: UIViewController {
 		fatalError("init(coder:) has not been implemented.")
 	}
 
-	private lazy var messageComposerView = MessageComposerView()
+	private lazy var collectionView: UICollectionView = {
+		let layout = UICollectionViewFlowLayout()
+		let collection = UICollectionView(frame: CGRect(), collectionViewLayout: layout)
+
+		collection.allowsSelection = false
+		collection.delegate = self
+		collection.dataSource = self
+		collection.register(MessageCollectionViewCell.self, forCellWithReuseIdentifier: MessageCollectionViewCell.cellID)
+
+		return collection
+	}()
+	private lazy var messageComposerView = MessageComposerView(delegate: self)
 	private var messageComposerBottomConstraint: NSLayoutConstraint!
 
 	private func setupInitialLayout() {
 		let safeArea = view.safeAreaLayoutGuide
 
 		view.addSubview(messageComposerView)
+		view.addSubview(collectionView)
 
 		messageComposerView.translatesAutoresizingMaskIntoConstraints = false
 		messageComposerBottomConstraint = messageComposerView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
 		messageComposerBottomConstraint.activate()
 		messageComposerView.leftAnchor.constraint(equalTo: safeArea.leftAnchor).activate()
 		messageComposerView.rightAnchor.constraint(equalTo: safeArea.rightAnchor).activate()
-		messageComposerView.heightAnchor.constraint(equalToConstant: 64).activate()
+		messageComposerView.heightAnchor.constraint(equalToConstant: messageComposerView.intrinsicContentSize.height).activate()
+
+		collectionView.translatesAutoresizingMaskIntoConstraints = false
+		collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor).activate()
+		collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).activate()
+		collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).activate()
+		collectionView.bottomAnchor.constraint(equalTo: messageComposerView.topAnchor).activate()
 	}
 
 	override func viewDidLoad() {
@@ -81,6 +99,28 @@ final class ChatViewController: UIViewController {
 			return chat.title
 		}
 		set {}
+	}
+
+	// MessageComposerViewDelegate
+	func didCompose(message: Message) {
+		chat.send(message: message)
+	}
+
+	// Collection view
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return 1
+	}
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return 5
+	}
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		return collectionView.dequeueReusableCell(withReuseIdentifier: MessageCollectionViewCell.cellID, for: indexPath) as! MessageCollectionViewCell
+	}
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		let width = view.bounds.width
+		let height: CGFloat = 100
+
+		return CGSize(width: width, height: height)
 	}
 
 }

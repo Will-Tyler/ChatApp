@@ -221,4 +221,27 @@ final class Firebase {
 		})
 	}
 
+	static func send(message: Message, to chat: Chat) {
+		let transcriptRef = Database.database().reference(withPath: "chats/\(chat.id)/transcript")
+		let messageRef = transcriptRef.childByAutoId()
+		let dict: [String: Any] = [
+			"content": message.content,
+			"time": Int64(message.timestamp.timeIntervalSince1970),
+			"sender": message.senderID
+		]
+
+		messageRef.setValue(dict)
+	}
+
+	static func observeTranscript(of chat: Chat, with handler: @escaping (Message)->()) {
+		let transcriptRef = Database.database().reference(withPath: "chats/\(chat.id)/transcript")
+
+		transcriptRef.observe(.childAdded, with: { snapshot in
+			let messageDict = snapshot.value as! [String: Any]
+			let message = Message(dict: messageDict)
+
+			handler(message)
+		})
+	}
+
 }

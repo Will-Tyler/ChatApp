@@ -13,6 +13,22 @@ struct Message {
 
 	let content: String
 	let timestamp: Date
-	let sender: User
+	let senderID: User.UID
+
+	init(content: String, senderID: User.UID) {
+		assert(!content.isEmpty)
+		assert(!senderID.isEmpty)
+
+		self.content = content
+		self.timestamp = Date()
+		self.senderID = senderID
+	}
+	init(dict: [String: Any]) {
+		let dateInt = dict["time"] as! Int64
+
+		self.timestamp = Date(timeIntervalSince1970: TimeInterval(exactly: dateInt)!)
+		self.content = dict["content"] as! String
+		self.senderID = dict["sender"] as! String
+	}
 
 }
