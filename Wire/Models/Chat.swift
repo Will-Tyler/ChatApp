@@ -17,7 +17,7 @@ struct Chat {
 	var name: String?
 	var memberIDs: [Member.UID]
 	var transcript: [Message]
-	private let title: NSMutableString
+	private let loadedTitle: NSMutableString
 
 	init(id: String, name: String? = nil, members: [String], transcript: [Message] = []) {
 		assert(!id.isEmpty)
@@ -31,16 +31,28 @@ struct Chat {
 		self.name = name
 		self.memberIDs = members
 		self.transcript = transcript
-		self.title = ""
+		self.loadedTitle = ""
 	}
 	init(id: String, from dictionary: [String: Any]) {
 		self.id = id
 		self.memberIDs = dictionary["members"] as! [String]
 		self.name = dictionary["name"] as? String
 		self.transcript = dictionary["transcript"] as? [Message] ?? []
-		self.title = ""
+		self.loadedTitle = ""
 	}
 
+	var title: String? {
+		get {
+			let string = loadedTitle as String
+
+			if string.isEmpty {
+				return nil
+			}
+			else {
+				return string
+			}
+		}
+	}
 	var preview: String? {
 		get {
 			return transcript.last?.content
@@ -50,8 +62,8 @@ struct Chat {
 		if name != nil {
 			handler(name!)
 		}
-		else if !(title == "") {
-			handler(title as String)
+		else if !(loadedTitle == "") {
+			handler(loadedTitle as String)
 		}
 		else {
 			var memberIDs = Set<User.UID>(self.memberIDs)
@@ -80,7 +92,7 @@ struct Chat {
 				
 				let title = names.joined(separator: ", ").appending("...")
 
-				self.title.setString(title)
+				self.loadedTitle.setString(title)
 				handler(title)
 			})
 		}

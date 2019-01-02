@@ -90,6 +90,10 @@ final class ChatsViewController: UIViewController, UITableViewDelegate, UITableV
 		return 96
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let chat = chats[indexPath.row]
+		let chatViewController = ChatViewController(chat: chat)
+
+		navigationController?.pushViewController(chatViewController, animated: true)
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
