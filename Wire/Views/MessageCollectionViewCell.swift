@@ -26,6 +26,7 @@ final class MessageCollectionViewCell: UICollectionViewCell {
 		view.textColor = .white
 		view.isEditable = false
 		view.isScrollEnabled = false
+		view.textContainerInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
 
 		view.layer.masksToBounds = false
 		view.layer.cornerRadius = 8
@@ -51,17 +52,13 @@ final class MessageCollectionViewCell: UICollectionViewCell {
 		case .other:
 			textView.leadingAnchor.constraint(equalTo: leadingAnchor).activate()
 		}
-//		textView.topAnchor.constraint(equalTo: topAnchor).activate()
-//		textView.leadingAnchor.constraint(equalTo: leadingAnchor).activate()
-//		textView.trailingAnchor.constraint(equalTo: trailingAnchor).activate()
-//		textView.bottomAnchor.constraint(equalTo: bottomAnchor).activate()
 	}
 
-	override func layoutSubviews() {
-		super.layoutSubviews()
-
-		backgroundColor = Colors.cell
-	}
+//	override func layoutSubviews() {
+//		super.layoutSubviews()
+//
+//		backgroundColor = Colors.cell
+//	}
 
 	static let cellID = "MessageCollectionViewCell"
 

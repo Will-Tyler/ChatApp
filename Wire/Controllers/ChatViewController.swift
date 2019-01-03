@@ -23,6 +23,10 @@ final class ChatViewController: UIViewController, MessageComposerViewDelegate, U
 
 	private lazy var collectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
+
+		layout.minimumLineSpacing = 1
+		layout.minimumInteritemSpacing = 1
+
 		let collection = UICollectionView(frame: CGRect(), collectionViewLayout: layout)
 
 		collection.backgroundColor = Colors.background
@@ -153,7 +157,7 @@ final class ChatViewController: UIViewController, MessageComposerViewDelegate, U
 		let estimatedFrame = content.boundingRect(with: size, options: options, attributes: [.font: font], context: nil)
 		let height = ceil(estimatedFrame.height)
 
-		return CGSize(width: width, height: height + 16)
+		return CGSize(width: width, height: height + 8)
 	}
 
 }
