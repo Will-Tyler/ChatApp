@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -75,14 +74,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 			0: {
 				let tbc = self.tabBarController! as! TabBarController
 
-				do {
-					try Auth.auth().signOut()
-				}
-				catch let error {
+				Firebase.signOut(error: { error in
 					self.alertUser(title: "Error Signing Out", message: error.localizedDescription)
-
-					return
-				}
+				})
 
 				tbc.presentSignInController(animated: true)
 			}

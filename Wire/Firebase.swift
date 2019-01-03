@@ -161,6 +161,15 @@ final class Firebase {
 			handler(error)
 		}
 	}
+	static func signOut(error handler: (Error)->()) {
+		do {
+			try Auth.auth().signOut()
+		}
+		catch let error {
+			handler(error)
+			return
+		}
+	}
 
 	static func createUser(email: String, password: String, displayName: String, completion: @escaping ()->(), error errorHandler: @escaping (Error)->()) {
 		Auth.auth().createUser(withEmail: email, password: password, completion: { (authDataResult, error) in
