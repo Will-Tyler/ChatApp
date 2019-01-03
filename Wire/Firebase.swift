@@ -41,7 +41,7 @@ final class Firebase {
 		})
 
 		let chatID = chatRef.key
-		let chat = Chat(id: chatID, name: name, members: memberIDs)
+		let chat = Chat(id: chatID, name: name, memberIDs: memberIDs)
 
 		return chat
 	}

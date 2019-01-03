@@ -19,9 +19,9 @@ struct Chat {
 	var transcript: [Message]
 	private let loadedTitle: NSMutableString
 
-	init(id: String, name: String? = nil, members: [String], transcript: [Message] = []) {
+	init(id: String, name: String? = nil, memberIDs: [String], transcript: [Message] = []) {
 		assert(!id.isEmpty)
-		assert(!members.isEmpty, "Cannot have a Chat without any members.")
+		assert(!memberIDs.isEmpty, "Cannot have a Chat without any members.")
 
 		if let name = name {
 			assert(!name.isEmpty, "Cannot have a Chat with an empty name.")
@@ -29,7 +29,7 @@ struct Chat {
 
 		self.id = id
 		self.name = name
-		self.memberIDs = members
+		self.memberIDs = memberIDs
 		self.transcript = transcript
 		self.loadedTitle = ""
 	}
@@ -69,6 +69,10 @@ struct Chat {
 			var memberIDs = Set<User.UID>(self.memberIDs)
 			var randomIDs = [String]()
 
+			if let currentID = Firebase.currentID {
+				memberIDs.remove(currentID)
+			}
+
 			while memberIDs.count > 0, randomIDs.count < 3 {
 				let randomID = memberIDs.randomElement()!
 
@@ -89,8 +93,15 @@ struct Chat {
 
 			group.notify(queue: .main, execute: {
 				assert(!names.isEmpty)
-				
-				let title = names.joined(separator: ", ").appending("...")
+
+				let title: String
+
+				if names.count > 1 {
+					title = names.joined(separator: ", ").appending("...")
+				}
+				else {
+					title = names.first!
+				}
 
 				self.loadedTitle.setString(title)
 				handler(title)
