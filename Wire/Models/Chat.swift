@@ -41,18 +41,6 @@ struct Chat {
 		self.loadedTitle = ""
 	}
 
-	var title: String? {
-		get {
-			let string = loadedTitle as String
-
-			if string.isEmpty {
-				return nil
-			}
-			else {
-				return string
-			}
-		}
-	}
 	var preview: String? {
 		get {
 			return transcript.last?.content
@@ -62,7 +50,7 @@ struct Chat {
 		if name != nil {
 			handler(name!)
 		}
-		else if !(loadedTitle == "") {
+		else if !(loadedTitle.length == 0) {
 			handler(loadedTitle as String)
 		}
 		else {

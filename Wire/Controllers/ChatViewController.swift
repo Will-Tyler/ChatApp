@@ -16,6 +16,10 @@ final class ChatViewController: UIViewController, MessageComposerViewDelegate, U
 	init(chat: Chat) {
 		self.chat = chat
 		super.init(nibName: nil, bundle: nil)
+
+		chat.handleTitle(with: { title in
+			self.title = title
+		})
 	}
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented.")
@@ -89,12 +93,6 @@ final class ChatViewController: UIViewController, MessageComposerViewDelegate, U
 		get {
 			return .lightContent
 		}
-	}
-	override var title: String? {
-		get {
-			return chat.title
-		}
-		set {}
 	}
 
 	@objc
