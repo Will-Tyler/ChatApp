@@ -25,6 +25,7 @@ final class ChatViewController: UIViewController, MessageComposerViewDelegate, U
 		let layout = UICollectionViewFlowLayout()
 		let collection = UICollectionView(frame: CGRect(), collectionViewLayout: layout)
 
+		collection.backgroundColor = Colors.background
 		collection.allowsSelection = false
 		collection.delegate = self
 		collection.dataSource = self
@@ -59,6 +60,7 @@ final class ChatViewController: UIViewController, MessageComposerViewDelegate, U
 		super.viewDidLoad()
 
 		view.backgroundColor = Colors.background
+		tabBarController?.tabBar.isHidden = true
 
 		setupInitialLayout()
 
@@ -67,10 +69,28 @@ final class ChatViewController: UIViewController, MessageComposerViewDelegate, U
 		let tap = UITapGestureRecognizer(target: messageComposerView, action: #selector(resignFirstResponder))
 
 		view.addGestureRecognizer(tap)
+
+		observeTranscript()
+	}
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		tabBarController?.tabBar.isHidden = false
 	}
 
 	deinit {
 		NotificationCenter.default.removeObserver(self)
+	}
+
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		get {
+			return .lightContent
+		}
+	}
+	override var title: String? {
+		get {
+			return chat.title
+		}
+		set {}
 	}
 
 	@objc
@@ -89,16 +109,10 @@ final class ChatViewController: UIViewController, MessageComposerViewDelegate, U
 		}
 	}
 
-	override var preferredStatusBarStyle: UIStatusBarStyle {
-		get {
-			return .lightContent
-		}
-	}
-	override var title: String? {
-		get {
-			return chat.title
-		}
-		set {}
+	private func observeTranscript() {
+		Firebase.observeTranscript(of: chat, with: { message in
+			self.append(message: message)
+		})
 	}
 
 	// MessageComposerViewDelegate
@@ -106,21 +120,40 @@ final class ChatViewController: UIViewController, MessageComposerViewDelegate, U
 		chat.send(message: message)
 	}
 
+	private var messages = [Message]()
+
+	func append(message: Message) {
+		let count = messages.count
+		let path = IndexPath(row: count, section: 0)
+
+		messages.append(message)
+		collectionView.insertItems(at: [path])
+	}
+
 	// Collection view
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return 1
 	}
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 5
+		return messages.count
 	}
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		return collectionView.dequeueReusableCell(withReuseIdentifier: MessageCollectionViewCell.cellID, for: indexPath) as! MessageCollectionViewCell
+		let messageCell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageCollectionViewCell.cellID, for: indexPath) as! MessageCollectionViewCell
+
+		messageCell.set(message: messages[indexPath.row])
+
+		return messageCell
 	}
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let width = view.bounds.width
-		let height: CGFloat = 100
+		let content = messages[indexPath.row].content as NSString
+		let width: CGFloat = collectionView.bounds.width
+		let size = CGSize(width: 256 as CGFloat, height: .greatestFiniteMagnitude)
+		let font = UIFont.systemFont(ofSize: 18)
+		let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+		let estimatedFrame = content.boundingRect(with: size, options: options, attributes: [.font: font], context: nil)
+		let height = ceil(estimatedFrame.height)
 
-		return CGSize(width: width, height: height)
+		return CGSize(width: width, height: height + 16)
 	}
 
 }

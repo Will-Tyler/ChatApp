@@ -26,9 +26,6 @@ final class MessageComposerView: UIView {
 
 		field.attributedPlaceholder = NSAttributedString(string: "Compose a message...", attributes: [.foregroundColor: UIColor.lightGray])
 		field.textColor = .white
-		field.layer.masksToBounds = false
-		field.layer.borderColor = Colors.cell.cgColor
-		field.layer.borderWidth = 1
 
 		return field
 	}()
