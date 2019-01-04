@@ -9,7 +9,7 @@
 import UIKit
 
 
-class SignInViewController: UIViewController {
+final class SignInViewController: UIViewController {
 
 	private let wireLabel: UILabel = {
 		let label = UILabel()
@@ -84,6 +84,7 @@ class SignInViewController: UIViewController {
 	private var nameFieldHeightConstraint: NSLayoutConstraint!
 	private var emailFieldHeightConstraint: NSLayoutConstraint!
 	private var passwordFieldHeightConstraint: NSLayoutConstraint!
+	private var fieldContainerCenterYConstraint: NSLayoutConstraint!
 
 	private func setupInitialLayout() {
 		view.subviews.forEach({ $0.removeFromSuperview() })
@@ -122,7 +123,8 @@ class SignInViewController: UIViewController {
 
 		fieldContainer.translatesAutoresizingMaskIntoConstraints = false
 		fieldContainer.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor).isActive = true
-		fieldContainer.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor).isActive = true
+		fieldContainerCenterYConstraint = fieldContainer.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor)
+		fieldContainerCenterYConstraint.activate()
 		fieldContainer.widthAnchor.constraint(equalTo: safeArea.widthAnchor, constant: -32).isActive = true
 		fieldContainerHeightConstraint = fieldContainer.heightAnchor.constraint(equalToConstant: 100)
 		fieldContainerHeightConstraint.isActive = true
@@ -162,6 +164,12 @@ class SignInViewController: UIViewController {
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(endEditing))
 
 		view.addGestureRecognizer(tapRecognizer)
+
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboard(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+	}
+
+	deinit {
+		NotificationCenter.default.removeObserver(self)
 	}
 
 	@objc
@@ -219,6 +227,25 @@ class SignInViewController: UIViewController {
 			nameFieldHeightConstraint.isActive = true
 			emailFieldHeightConstraint.isActive = true
 			passwordFieldHeightConstraint.isActive = true
+		}
+	}
+
+	@objc
+	private func keyboard(_ notification: Notification) {
+		if let userInfo = notification.userInfo {
+			let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+			let viewHeight = view.frame.height
+			let endHeightFromBottom = viewHeight - endFrame.origin.y
+
+			guard endHeightFromBottom > 0 else {
+				fieldContainerCenterYConstraint.constant = 0
+				return
+			}
+
+			let endHeightFromTop = viewHeight - endHeightFromBottom
+			let newOffset = viewHeight / 2 - endHeightFromTop / 2
+
+			fieldContainerCenterYConstraint.constant = -newOffset
 		}
 	}
 

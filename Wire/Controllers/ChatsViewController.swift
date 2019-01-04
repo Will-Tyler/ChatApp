@@ -66,13 +66,15 @@ final class ChatsViewController: UIViewController, UITableViewDelegate, UITableV
 	private var chats = [Chat]()
 
 	private func observeChats() {
-		Firebase.observeChats(at: Firebase.currentID!, with: { chat in
-			let count = self.chats.count
-			let path = IndexPath(row: count, section: 0)
+		if let currentID = Firebase.currentID {
+			Firebase.observeChats(at: currentID, with: { chat in
+				let count = self.chats.count
+				let path = IndexPath(row: count, section: 0)
 
-			self.chats.append(chat)
-			self.tableView.insertRows(at: [path], with: .automatic)
-		})
+				self.chats.append(chat)
+				self.tableView.insertRows(at: [path], with: .automatic)
+			})
+		}
 	}
 
 	// Table View
