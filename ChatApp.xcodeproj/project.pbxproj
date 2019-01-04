@@ -153,9 +153,9 @@
 		4CC71EDC21976F76003BBB4A = {
 			isa = PBXGroup;
 			children = (
-				4CC71EE721976F76003BBB4A /* Wire */,
-				4CC71EFE21976F78003BBB4A /* WireTests */,
-				4CC71F0921976F78003BBB4A /* WireUITests */,
+				4CC71EE721976F76003BBB4A /* ChatApp */,
+				4CC71EFE21976F78003BBB4A /* ChatAppTests */,
+				4CC71F0921976F78003BBB4A /* ChatAppUITests */,
 				4CC71EE621976F76003BBB4A /* Products */,
 				A90A25EB28FF3BB1A665BC1A /* Pods */,
 				DDF919E1F3EB1995D3715276 /* Frameworks */,
@@ -172,7 +172,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4CC71EE721976F76003BBB4A /* Wire */ = {
+		4CC71EE721976F76003BBB4A /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
 				4CC71EE821976F76003BBB4A /* AppDelegate.swift */,
@@ -191,25 +191,25 @@
 				4CC71F1C219788FB003BBB4A /* GoogleService-Info.plist */,
 				4CC71EF621976F77003BBB4A /* Info.plist */,
 			);
-			path = Wire;
+			path = ChatApp;
 			sourceTree = "<group>";
 		};
-		4CC71EFE21976F78003BBB4A /* WireTests */ = {
+		4CC71EFE21976F78003BBB4A /* ChatAppTests */ = {
 			isa = PBXGroup;
 			children = (
 				4CC71EFF21976F78003BBB4A /* WireTests.swift */,
 				4CC71F0121976F78003BBB4A /* Info.plist */,
 			);
-			path = WireTests;
+			path = ChatAppTests;
 			sourceTree = "<group>";
 		};
-		4CC71F0921976F78003BBB4A /* WireUITests */ = {
+		4CC71F0921976F78003BBB4A /* ChatAppUITests */ = {
 			isa = PBXGroup;
 			children = (
 				4CC71F0A21976F78003BBB4A /* WireUITests.swift */,
 				4CC71F0C21976F78003BBB4A /* Info.plist */,
 			);
-			path = WireUITests;
+			path = ChatAppUITests;
 			sourceTree = "<group>";
 		};
 		4CCBD04F21989D77004521B1 /* Controllers */ = {
