@@ -222,6 +222,20 @@ final class Firebase {
 
 			guard memberIDs.count > 1 else {
 				Database.database().reference(withPath: "chats/\(chat.id)").removeValue()
+
+				if let memberID = memberIDs.first {
+					Database.database().reference(withPath: "users/\(memberID)/chats").observeSingleEvent(of: .value, with: { snapshot in
+						let chatPointers = snapshot.value as! [String: String]
+						let keys = chatPointers.keys(where: { $1 == chat.id })
+
+						for key in keys {
+							let chatPointer = chatsRef.child(key)
+
+							chatPointer.removeValue()
+						}
+					})
+				}
+
 				return
 			}
 

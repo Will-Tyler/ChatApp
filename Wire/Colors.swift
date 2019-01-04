@@ -16,6 +16,7 @@ struct Colors {
 	static let tabBar = UIColor(white: 55)
 	static let navigationBar = UIColor(white: 55)
 	static let cell = UIColor(white: 0x34)
+	static let systemBlue = UIColor(red: 0, green: 122 / 255, blue: 1, alpha: 1)
 
 }
 

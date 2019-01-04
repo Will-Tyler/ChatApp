@@ -16,7 +16,7 @@ final class MessageCollectionViewCell: UICollectionViewCell {
 
 		switch mode! {
 		case .me:
-			view.backgroundColor = .blue
+			view.backgroundColor = Colors.systemBlue
 
 		case .other:
 			view.backgroundColor = .darkGray

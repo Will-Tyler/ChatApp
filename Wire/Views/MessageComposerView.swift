@@ -86,6 +86,7 @@ final class MessageComposerView: UIView {
 			let message = Message(content: content, senderID: Firebase.currentID!)
 
 			delegate.didCompose(message: message)
+			textField.text = ""
 		}
 	}
 
