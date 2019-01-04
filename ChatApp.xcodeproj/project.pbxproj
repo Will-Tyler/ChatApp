@@ -79,16 +79,16 @@
 		4CBC8404219F23F4001DB328 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkNavigationContoller.swift; sourceTree = "<group>"; };
 		4CC47AE021C82FC600186657 /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
-		4CC71EE521976F76003BBB4A /* Wire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wire.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CC71EE521976F76003BBB4A /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC71EE821976F76003BBB4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CC71EEA21976F76003BBB4A /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4CC71EF121976F77003BBB4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CC71EF621976F77003BBB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4CC71EFB21976F78003BBB4A /* WireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CC71EFB21976F78003BBB4A /* ChatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC71EFF21976F78003BBB4A /* WireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireTests.swift; sourceTree = "<group>"; };
 		4CC71F0121976F78003BBB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4CC71F0621976F78003BBB4A /* WireUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WireUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CC71F0621976F78003BBB4A /* ChatAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC71F0A21976F78003BBB4A /* WireUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireUITests.swift; sourceTree = "<group>"; };
 		4CC71F0C21976F78003BBB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CC71F1821977C66003BBB4A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -165,9 +165,9 @@
 		4CC71EE621976F76003BBB4A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4CC71EE521976F76003BBB4A /* Wire.app */,
-				4CC71EFB21976F78003BBB4A /* WireTests.xctest */,
-				4CC71F0621976F78003BBB4A /* WireUITests.xctest */,
+				4CC71EE521976F76003BBB4A /* ChatApp.app */,
+				4CC71EFB21976F78003BBB4A /* ChatAppTests.xctest */,
+				4CC71F0621976F78003BBB4A /* ChatAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,9 +268,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4CC71EE421976F76003BBB4A /* Wire */ = {
+		4CC71EE421976F76003BBB4A /* ChatApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4CC71F0F21976F78003BBB4A /* Build configuration list for PBXNativeTarget "Wire" */;
+			buildConfigurationList = 4CC71F0F21976F78003BBB4A /* Build configuration list for PBXNativeTarget "ChatApp" */;
 			buildPhases = (
 				E55816DD8068F517FBA8C227 /* [CP] Check Pods Manifest.lock */,
 				4CC71EE121976F76003BBB4A /* Sources */,
@@ -283,14 +283,14 @@
 			);
 			dependencies = (
 			);
-			name = Wire;
+			name = ChatApp;
 			productName = Wire;
-			productReference = 4CC71EE521976F76003BBB4A /* Wire.app */;
+			productReference = 4CC71EE521976F76003BBB4A /* ChatApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4CC71EFA21976F78003BBB4A /* WireTests */ = {
+		4CC71EFA21976F78003BBB4A /* ChatAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4CC71F1221976F78003BBB4A /* Build configuration list for PBXNativeTarget "WireTests" */;
+			buildConfigurationList = 4CC71F1221976F78003BBB4A /* Build configuration list for PBXNativeTarget "ChatAppTests" */;
 			buildPhases = (
 				F5484B04D2DBBA50920316EF /* [CP] Check Pods Manifest.lock */,
 				4CC71EF721976F78003BBB4A /* Sources */,
@@ -302,14 +302,14 @@
 			dependencies = (
 				4CC71EFD21976F78003BBB4A /* PBXTargetDependency */,
 			);
-			name = WireTests;
+			name = ChatAppTests;
 			productName = WireTests;
-			productReference = 4CC71EFB21976F78003BBB4A /* WireTests.xctest */;
+			productReference = 4CC71EFB21976F78003BBB4A /* ChatAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4CC71F0521976F78003BBB4A /* WireUITests */ = {
+		4CC71F0521976F78003BBB4A /* ChatAppUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4CC71F1521976F78003BBB4A /* Build configuration list for PBXNativeTarget "WireUITests" */;
+			buildConfigurationList = 4CC71F1521976F78003BBB4A /* Build configuration list for PBXNativeTarget "ChatAppUITests" */;
 			buildPhases = (
 				02F4177C4439B464C0977D96 /* [CP] Check Pods Manifest.lock */,
 				4CC71F0221976F78003BBB4A /* Sources */,
@@ -321,9 +321,9 @@
 			dependencies = (
 				4CC71F0821976F78003BBB4A /* PBXTargetDependency */,
 			);
-			name = WireUITests;
+			name = ChatAppUITests;
 			productName = WireUITests;
-			productReference = 4CC71F0621976F78003BBB4A /* WireUITests.xctest */;
+			productReference = 4CC71F0621976F78003BBB4A /* ChatAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -349,7 +349,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4CC71EE021976F76003BBB4A /* Build configuration list for PBXProject "Wire" */;
+			buildConfigurationList = 4CC71EE021976F76003BBB4A /* Build configuration list for PBXProject "ChatApp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -362,9 +362,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4CC71EE421976F76003BBB4A /* Wire */,
-				4CC71EFA21976F78003BBB4A /* WireTests */,
-				4CC71F0521976F78003BBB4A /* WireUITests */,
+				4CC71EE421976F76003BBB4A /* ChatApp */,
+				4CC71EFA21976F78003BBB4A /* ChatAppTests */,
+				4CC71F0521976F78003BBB4A /* ChatAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -574,12 +574,12 @@
 /* Begin PBXTargetDependency section */
 		4CC71EFD21976F78003BBB4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4CC71EE421976F76003BBB4A /* Wire */;
+			target = 4CC71EE421976F76003BBB4A /* ChatApp */;
 			targetProxy = 4CC71EFC21976F78003BBB4A /* PBXContainerItemProxy */;
 		};
 		4CC71F0821976F78003BBB4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4CC71EE421976F76003BBB4A /* Wire */;
+			target = 4CC71EE421976F76003BBB4A /* ChatApp */;
 			targetProxy = 4CC71F0721976F78003BBB4A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -759,7 +759,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wire.app/Wire";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChatApp.app/ChatApp";
 			};
 			name = Debug;
 		};
@@ -781,7 +781,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wire.app/Wire";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChatApp.app/ChatApp";
 			};
 			name = Release;
 		};
@@ -830,7 +830,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4CC71EE021976F76003BBB4A /* Build configuration list for PBXProject "Wire" */ = {
+		4CC71EE021976F76003BBB4A /* Build configuration list for PBXProject "ChatApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CC71F0D21976F78003BBB4A /* Debug */,
@@ -839,7 +839,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4CC71F0F21976F78003BBB4A /* Build configuration list for PBXNativeTarget "Wire" */ = {
+		4CC71F0F21976F78003BBB4A /* Build configuration list for PBXNativeTarget "ChatApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CC71F1021976F78003BBB4A /* Debug */,
@@ -848,7 +848,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4CC71F1221976F78003BBB4A /* Build configuration list for PBXNativeTarget "WireTests" */ = {
+		4CC71F1221976F78003BBB4A /* Build configuration list for PBXNativeTarget "ChatAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CC71F1321976F78003BBB4A /* Debug */,
@@ -857,7 +857,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4CC71F1521976F78003BBB4A /* Build configuration list for PBXNativeTarget "WireUITests" */ = {
+		4CC71F1521976F78003BBB4A /* Build configuration list for PBXNativeTarget "ChatAppUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CC71F1621976F78003BBB4A /* Debug */,
