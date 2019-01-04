@@ -12,15 +12,25 @@ import UIKit
 class TabBarController: UITabBarController, SignInViewControllerDelegate, SettingsViewControllerSignOutDelegate {
 
 	private lazy var signInController = SignInViewController(delegate: self)
-	private lazy var pulsesNavigation = DarkNavigationContoller(rootViewController: ChatsViewController())
-	private lazy var contactsNavigation = DarkNavigationContoller(rootViewController: ContactsViewController())
-	private lazy var settingsNavigation: DarkNavigationContoller = {
-		let controller = DarkNavigationContoller(rootViewController: SettingsViewController(signOutDelegate: self))
+	private var chatsNavigation: DarkNavigationContoller {
+		get {
+			return DarkNavigationContoller(rootViewController: ChatsViewController())
+		}
+	}
+	private var contactsNavigation: DarkNavigationContoller {
+		get {
+			return DarkNavigationContoller(rootViewController: ContactsViewController())
+		}
+	}
+	private var settingsNavigation: DarkNavigationContoller  {
+		get {
+			let controller = DarkNavigationContoller(rootViewController: SettingsViewController(signOutDelegate: self))
 
-		controller.navigationBar.prefersLargeTitles = true
+			controller.navigationBar.prefersLargeTitles = true
 
-		return controller
-	}()
+			return controller
+		}
+	}
 
 	override var preferredStatusBarStyle: UIStatusBarStyle {
 		get {
@@ -43,8 +53,7 @@ class TabBarController: UITabBarController, SignInViewControllerDelegate, Settin
 
 	// SignInViewController
 	func didSignIn() {
-		setViewControllers([pulsesNavigation, contactsNavigation, settingsNavigation], animated: true)
-		selectedViewController = pulsesNavigation
+		setViewControllers([chatsNavigation, contactsNavigation, settingsNavigation], animated: true)
 		tabBar.isHidden = false
 	}
 	// SettingsViewControllerSignOutDelegate
