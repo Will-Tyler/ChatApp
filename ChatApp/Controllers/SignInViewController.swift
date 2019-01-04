@@ -24,7 +24,7 @@ final class SignInViewController: UIViewController {
 	private let wireLabel: UILabel = {
 		let label = UILabel()
 
-		label.text = "Wire"
+		label.text = "ChatApp"
 		label.textColor = .white
 		label.font = label.font.withSize(64)
 		label.textAlignment = .center
