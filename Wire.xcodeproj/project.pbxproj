@@ -20,7 +20,6 @@
 		4C99A80721DD14F200C90D3A /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99A80621DD14F200C90D3A /* Dictionary.swift */; };
 		4C99A80921DD221800C90D3A /* MessageComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99A80821DD221800C90D3A /* MessageComposerView.swift */; };
 		4C99A80B21DD572600C90D3A /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99A80A21DD572600C90D3A /* MessageCollectionViewCell.swift */; };
-		4CB177DA21A0696800E1D0E1 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB177D921A0696800E1D0E1 /* SplashViewController.swift */; };
 		4CBC8405219F23F4001DB328 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8404219F23F4001DB328 /* Colors.swift */; };
 		4CBC8407219F2900001DB328 /* DarkNavigationContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */; };
 		4CC47AE121C82FC600186657 /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC47AE021C82FC600186657 /* NewChatViewController.swift */; };
@@ -77,7 +76,6 @@
 		4C99A80621DD14F200C90D3A /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		4C99A80821DD221800C90D3A /* MessageComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposerView.swift; sourceTree = "<group>"; };
 		4C99A80A21DD572600C90D3A /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
-		4CB177D921A0696800E1D0E1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		4CBC8404219F23F4001DB328 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkNavigationContoller.swift; sourceTree = "<group>"; };
 		4CC47AE021C82FC600186657 /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				4CC47AE021C82FC600186657 /* NewChatViewController.swift */,
 				4CC71EEC21976F76003BBB4A /* SettingsViewController.swift */,
 				4CF3BCCD21A0B73500E6AD8D /* SignInViewController.swift */,
-				4CB177D921A0696800E1D0E1 /* SplashViewController.swift */,
 				4CC71F1821977C66003BBB4A /* TabBarController.swift */,
 			);
 			path = Controllers;
@@ -528,7 +525,6 @@
 				4CC71EED21976F76003BBB4A /* SettingsViewController.swift in Sources */,
 				4CC71F1921977C66003BBB4A /* TabBarController.swift in Sources */,
 				4C502DD621CD77AB0000E210 /* TextFieldTableViewCell.swift in Sources */,
-				4CB177DA21A0696800E1D0E1 /* SplashViewController.swift in Sources */,
 				4C99A80721DD14F200C90D3A /* Dictionary.swift in Sources */,
 				4C5BE93E21DA987600AD0AFC /* Firebase.swift in Sources */,
 				4CF3BCCE21A0B73500E6AD8D /* SignInViewController.swift in Sources */,

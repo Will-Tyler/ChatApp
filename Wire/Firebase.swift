@@ -211,18 +211,21 @@ final class Firebase {
 	}
 
 	static func leave(chat: Chat) {
+		let currentID = self.currentID!
 		let membersRef = Database.database().reference(withPath: "chats/\(chat.id)/members")
-		let chatsRef = Database.database().reference(withPath: "users/\(currentID!)/chats")
+		let chatsRef = Database.database().reference(withPath: "users/\(currentID)/chats")
 
 		membersRef.observeSingleEvent(of: .value, with: { snapshot in
-			let memberIDs = snapshot.value as! [String]
-			let indices = memberIDs.indices(where: { $0 == currentID! })
+			var memberIDs = Set(snapshot.value as! [String])
 
-			for index in indices {
-				let memberRef = membersRef.child("\(index)")
+			memberIDs.remove(currentID)
 
-				memberRef.removeValue()
+			guard memberIDs.count > 1 else {
+				Database.database().reference(withPath: "chats/\(chat.id)").removeValue()
+				return
 			}
+
+			membersRef.setValue(Array(memberIDs))
 		})
 		chatsRef.observeSingleEvent(of: .value, with: { snapshot in
 			let chatPointers = snapshot.value as! [String: String]

@@ -36,7 +36,7 @@ final class AddContactView: UIView {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 
-		backgroundColor = .gray
+		backgroundColor = Colors.navigationBar
 
 		setupInitialLayout()
 	}
