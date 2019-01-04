@@ -9,13 +9,13 @@
 import UIKit
 
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, SignInViewControllerDelegate, SettingsViewControllerSignOutDelegate {
 
-	private lazy var signInController = SignInViewController()
+	private lazy var signInController = SignInViewController(delegate: self)
 	private lazy var pulsesNavigation = DarkNavigationContoller(rootViewController: ChatsViewController())
 	private lazy var contactsNavigation = DarkNavigationContoller(rootViewController: ContactsViewController())
 	private lazy var settingsNavigation: DarkNavigationContoller = {
-		let controller = DarkNavigationContoller(rootViewController: SettingsViewController())
+		let controller = DarkNavigationContoller(rootViewController: SettingsViewController(signOutDelegate: self))
 
 		controller.navigationBar.prefersLargeTitles = true
 
@@ -31,22 +31,26 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		viewControllers = [pulsesNavigation, contactsNavigation, settingsNavigation]
-		selectedViewController = pulsesNavigation
+		if Firebase.isSignedIn {
+			didSignIn()
+		}
+		else {
+			didSignOut()
+		}
 
 		tabBar.barTintColor = Colors.tabBar
     }
-	override func viewDidAppear(_ animated: Bool) {
-		if !signInController.isSignedIn {
-			present(signInController, animated: animated)
-		}
-	}
 
-	func presentSignInController(animated: Bool) {
-		present(signInController, animated: animated)
+	// SignInViewController
+	func didSignIn() {
+		setViewControllers([pulsesNavigation, contactsNavigation, settingsNavigation], animated: true)
+		selectedViewController = pulsesNavigation
+		tabBar.isHidden = false
 	}
-	func dismissSignInController(animated: Bool) {
-		dismiss(animated: animated)
+	// SettingsViewControllerSignOutDelegate
+	func didSignOut() {
+		setViewControllers([signInController], animated: true)
+		tabBar.isHidden = true
 	}
 
 }

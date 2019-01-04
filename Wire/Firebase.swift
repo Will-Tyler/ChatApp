@@ -17,6 +17,11 @@ final class Firebase {
 			return Auth.auth().currentUser?.uid
 		}
 	}
+	static var isSignedIn: Bool {
+		get {
+			return Auth.auth().currentUser != nil
+		}
+	}
 
 	@discardableResult
 	static func createChat(name: String?, memberIDs: [String]) -> Chat {
@@ -161,9 +166,10 @@ final class Firebase {
 			handler(error)
 		}
 	}
-	static func signOut(error handler: (Error)->()) {
+	static func signOut(completion: ()->(), error handler: (Error)->()) {
 		do {
 			try Auth.auth().signOut()
+			completion()
 		}
 		catch let error {
 			handler(error)

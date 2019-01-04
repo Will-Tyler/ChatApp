@@ -11,6 +11,16 @@ import UIKit
 
 final class SignInViewController: UIViewController {
 
+	private let delegate: SignInViewControllerDelegate
+
+	init(delegate: SignInViewControllerDelegate) {
+		self.delegate = delegate
+		super.init(nibName: nil, bundle: nil)
+	}
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+
 	private let wireLabel: UILabel = {
 		let label = UILabel()
 
@@ -283,8 +293,6 @@ final class SignInViewController: UIViewController {
 			return
 		}
 
-		let tabBarController = presentingViewController!
-
 		switch mode {
 		case .login:
 			Firebase.signIn(email: email, password: password, completion: { error in
@@ -293,7 +301,7 @@ final class SignInViewController: UIViewController {
 					return
 				}
 
-				tabBarController.dismiss(animated: true)
+				self.delegate.didSignIn()
 			})
 
 		case .register:
@@ -303,16 +311,10 @@ final class SignInViewController: UIViewController {
 			}
 
 			Firebase.createUser(email: email, password: password, displayName: displayName, completion: {
-				tabBarController.dismiss(animated: true)
+				self.delegate.didSignIn()
 			}, error: { error in
 				self.alertUser(title: "Error Signing In", message: error.localizedDescription)
 			})
-		}
-	}
-
-	var isSignedIn: Bool {
-		get {
-			return Firebase.currentID != nil
 		}
 	}
 
@@ -323,5 +325,12 @@ fileprivate enum Mode {
 
 	case login
 	case register
+
+}
+
+
+protocol SignInViewControllerDelegate {
+
+	func didSignIn()
 
 }

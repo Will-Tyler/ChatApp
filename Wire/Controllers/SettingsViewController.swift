@@ -11,6 +11,16 @@ import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+	private let signOutDelegate: SettingsViewControllerSignOutDelegate
+
+	init(signOutDelegate: SettingsViewControllerSignOutDelegate) {
+		self.signOutDelegate = signOutDelegate
+		super.init(nibName: nil, bundle: nil)
+	}
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+
 	private lazy var tableView: UITableView = {
 		let table = UITableView(frame: view.frame, style: .grouped)
 
@@ -69,13 +79,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		],
 		1: [
 			0: {
-				let tbc = self.tabBarController! as! TabBarController
-
-				Firebase.signOut(error: { error in
+				Firebase.signOut(completion: {
+					self.signOutDelegate.didSignOut()
+				}, error: { error in
 					self.alertUser(title: "Error Signing Out", message: error.localizedDescription)
 				})
-
-				tbc.presentSignInController(animated: true)
 			}
 		]
 	]
@@ -106,5 +114,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		cellActions[indexPath.section]![indexPath.row]!()
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
+
+}
+
+
+protocol SettingsViewControllerSignOutDelegate {
+
+	func didSignOut()
 
 }
