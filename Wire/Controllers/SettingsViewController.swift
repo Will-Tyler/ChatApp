@@ -59,9 +59,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		1: "Configure Wire"
 	]
 	private let cellTexts = [
-		0: [
-			0: "" // Display name cell
-		],
 		1: [
 			0: "Sign Out"
 		]
@@ -84,18 +81,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	]
 
 	func numberOfSections(in tableView: UITableView) -> Int {
-		if tableView === self.tableView {
-			return sectionNames.count
-		}
-		else {
-			fatalError()
-		}
+		return sectionNames.count
 	}
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		return sectionNames[section]!
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return cellTexts[section]!.count
+		return cellActions[section]!.count
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		if indexPath.section == 0, indexPath.row == 0 {

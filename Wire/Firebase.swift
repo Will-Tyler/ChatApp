@@ -253,4 +253,20 @@ final class Firebase {
 		})
 	}
 
+	static func handlePreview(of chat: Chat, with handler: @escaping (String)->()) {
+		let transcriptRef = Database.database().reference(withPath: "chats/\(chat.id)/transcript")
+		let query = transcriptRef.queryOrderedByKey().queryLimited(toLast: 1)
+
+		query.observeSingleEvent(of: .value, with: { snapshot in
+			if let message = snapshot.value as? [String: Any] {
+				assert(message.count == 1)
+
+				let messageDict = message.first!.value as! [String: Any]
+				let content = messageDict["content"] as! String
+
+				handler(content)
+			}
+		})
+	}
+
 }

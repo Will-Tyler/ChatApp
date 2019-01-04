@@ -16,10 +16,9 @@ struct Chat {
 	let id: String
 	var name: String?
 	var memberIDs: [Member.UID]
-	var transcript: [Message]
 	private let loadedTitle: NSMutableString
 
-	init(id: String, name: String? = nil, memberIDs: [String], transcript: [Message] = []) {
+	init(id: String, name: String? = nil, memberIDs: [String]) {
 		assert(!id.isEmpty)
 		assert(!memberIDs.isEmpty, "Cannot have a Chat without any members.")
 
@@ -30,22 +29,15 @@ struct Chat {
 		self.id = id
 		self.name = name
 		self.memberIDs = memberIDs
-		self.transcript = transcript
 		self.loadedTitle = ""
 	}
 	init(id: String, from dictionary: [String: Any]) {
 		self.id = id
 		self.memberIDs = dictionary["members"] as! [String]
 		self.name = dictionary["name"] as? String
-		self.transcript = dictionary["transcript"] as? [Message] ?? []
 		self.loadedTitle = ""
 	}
 
-	var preview: String? {
-		get {
-			return transcript.last?.content
-		}
-	}
 	func handleTitle(with handler: @escaping (String)->()) {
 		if name != nil {
 			handler(name!)
@@ -96,9 +88,11 @@ struct Chat {
 			})
 		}
 	}
+	func handlePreview(with handler: @escaping (String)->()) {
+		Firebase.handlePreview(of: self, with: handler)
+	}
 
 	mutating func send(message: Message) {
-		transcript.append(message)
 		Firebase.send(message: message, to: self)
 	}
 	

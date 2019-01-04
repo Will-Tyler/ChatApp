@@ -57,10 +57,9 @@ final class ChatTableViewCell: UITableViewCell {
 			chat.handleTitle(with: { title in
 				self.titleLabel.text = title
 			})
-
-			if let preview = chat.preview {
-				previewLabel.text = preview
-			}
+			chat.handlePreview(with: { preview in
+				self.previewLabel.text = preview
+			})
 		}
 	}
 	func setChat(to chat: Chat) {
