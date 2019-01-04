@@ -82,13 +82,30 @@ final class ContactsViewController: UIViewController, UITableViewDelegate, UITab
 	var mode: ContactsViewControllerMode = .view
 	var delegate: ContactsViewControllerDelegate!
 
-	private var contacts = [User]()
+	private typealias Contact = User
+	private var contacts = [Contact]()
 
 	private func observeContacts() {
 		Firebase.observeContacts(with: { contact in
-			let path = IndexPath(row: self.contacts.count, section: 0)
+			var index = 0
 
-			self.contacts.append(contact)
+			for member in self.contacts {
+				if contact.displayName < member.displayName {
+					break
+				}
+
+				index += 1
+			}
+
+			let path = IndexPath(row: index, section: 0)
+
+			if index < self.contacts.count {
+				self.contacts.insert(contact, at: index)
+			}
+			else {
+				self.contacts.append(contact)
+			}
+			
 			self.contactsTableView.insertRows(at: [path], with: .automatic)
 		})
 
