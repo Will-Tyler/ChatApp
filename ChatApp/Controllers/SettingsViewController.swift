@@ -66,7 +66,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	// TableView
 	private let sectionNames = [
 		0: "Display Name",
-		1: "Configure Wire"
+		1: "Configure ChatApp"
 	]
 	private let cellTexts = [
 		1: [
