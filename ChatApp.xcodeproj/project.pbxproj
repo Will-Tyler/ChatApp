@@ -76,6 +76,7 @@
 		4C99A80621DD14F200C90D3A /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		4C99A80821DD221800C90D3A /* MessageComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposerView.swift; sourceTree = "<group>"; };
 		4C99A80A21DD572600C90D3A /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		4CBB34B921E181260079CE14 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4CBC8404219F23F4001DB328 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4CBC8406219F2900001DB328 /* DarkNavigationContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkNavigationContoller.swift; sourceTree = "<group>"; };
 		4CC47AE021C82FC600186657 /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +157,7 @@
 				4CC71EE721976F76003BBB4A /* ChatApp */,
 				4CC71EFE21976F78003BBB4A /* ChatAppTests */,
 				4CC71F0921976F78003BBB4A /* ChatAppUITests */,
+				4CBB34B921E181260079CE14 /* README.md */,
 				4CC71EE621976F76003BBB4A /* Products */,
 				A90A25EB28FF3BB1A665BC1A /* Pods */,
 				DDF919E1F3EB1995D3715276 /* Frameworks */,
@@ -714,7 +716,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = willtyler.Wire;
+				PRODUCT_BUNDLE_IDENTIFIER = willtyler.ChatApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -734,7 +736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = willtyler.Wire;
+				PRODUCT_BUNDLE_IDENTIFIER = willtyler.ChatApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
