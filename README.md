@@ -4,7 +4,7 @@ An iOS messaging app written with Swift 4.2 and using a Firebase backend.
 
 ## Motivation
 
-I worked on this app mostly over 2018 Winter Break in order to work on my Swift and iOS Development skills. I also wanted to become familiar with using Google Firebase, which is a very quick and simple way to kickstart different projects.
+I worked on this app mostly over 2018 Winter Break in order to work on my Swift and iOS Development skills. I also wanted to become familiar with using Google Firebase, which is a very quick and simple way to kickstart different projects. The Firebase project will be taken down soon.
 
 ## Features
 
