@@ -6,6 +6,7 @@ target 'Wire' do
   # Pods for Wire
 	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
+	pod 'Firebase/Database'
 	pod 'GoogleSignIn'
 
   target 'WireTests' do
